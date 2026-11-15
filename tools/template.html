@@ -96,6 +96,16 @@ tr.mine td:first-child { box-shadow: inset 3px 0 0 var(--own); }
 .plats { display: flex; gap: 4px; flex-wrap: nowrap; }
 .plat { font-size: 11.5px; border: 1px solid var(--line); border-radius: 5px; padding: 1px 6px; white-space: nowrap; }
 .plat.off { opacity: .3; text-decoration: line-through; }
+button.chip-f { font-family: inherit; line-height: inherit; cursor: pointer; }
+button.plat.chip-f, button.cons.chip-f { color: inherit; }
+button.plat.chip-f { background: var(--surface); }
+button.cons.chip-f { background: transparent; }
+button.cons.chip-f { border: 1px solid transparent; border-radius: 5px; padding: 1px 5px; margin-left: -6px; }
+button.pill.chip-f { border: 1px solid transparent; }
+button.chip-f:hover { border-color: var(--accent); }
+button.chip-f.on { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+button.cons.chip-f.s2 { color: var(--accent); font-weight: 600; }
+button.chip-f:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .cons { font-size: 12.5px; white-space: nowrap; }
 .cons.s2 { color: var(--accent); font-weight: 600; }
 .notes { color: var(--muted); font-size: 13px; min-width: 32ch; position: relative; }
@@ -429,7 +439,9 @@ function render() {
   const list = GAMES.filter(match).sort(cmp);
   $("rows").innerHTML = list.map(g => {
     const link = `https://github.com/seedds/nxnative/tree/main/dm/games/${g.id}`;
-    const plats = ["Mac", "iPhone", "iPad"].map(p => `<span class="plat ${g.platforms.includes(p) ? "" : "off"}">${p}</span>`).join("");
+    const on = (k, v) => state.f[k].includes(v);
+    const chip = (k, v, cls, label, title = "") => `<button type="button" class="${cls} chip-f${on(k, v) ? " on" : ""}" data-fk="${k}" data-fv="${esc(v)}" aria-pressed="${on(k, v)}" title="${esc(title || (on(k, v) ? "Remove this filter" : "Filter by this"))}">${label}</button>`;
+    const plats = ["Mac", "iPhone", "iPad"].map(p => g.platforms.includes(p) ? chip("plat", p, "plat", p) : `<span class="plat off">${p}</span>`).join("");
     const notes = [g.fps && `<span class="fps">${esc(g.fps)}</span>`, ...g.notes.map(esc)].filter(Boolean);
     const LBL = { good: "works", bad: "open", fixed: "fixed", closed: "closed" };
     const reps = g.reports.length ? `<ul class="reports">${g.reports.map(r => `<li><span class="k k-${r.k}">${LBL[r.k]}</span><span>${esc(r.t)} ${ref(r.r, r.n)}</span></li>`).join("")}</ul>` : "";
@@ -439,9 +451,9 @@ function render() {
     return `<tr class="${g.owned ? "mine" : ""}">
       <td><span class="name"><a href="${link}" target="_blank" rel="noopener">${esc(g.name)}</a></span>${g.community ? `<span class="src">Issue report</span>` : ""}${g.engineOnly ? `<span class="src">New profile</span>` : ""}<span class="tid">${g.id}</span></td>
       <td class="c-lib own-cell">${g.owned ? `<span class="pill own-yes" tabindex="0" aria-describedby="own-${g.id}">Yes</span><span class="own-pop" role="tooltip" id="own-${g.id}"><b>Found in your folder</b>${LIB.owned[g.id].where.map(w => `<span>${esc(w)}</span>`).join("")}</span>` : `<span class="own-no">No</span>`}</td>
-      <td><span class="pill t-${g.tier.replace(/[^A-Za-z]+/g, "-")}" title="${esc(g.status)}">${g.tier}</span></td>
+      <td>${chip("tier", g.tier, `pill t-${g.tier.replace(/[^A-Za-z]+/g, "-")}`, g.tier, g.status)}</td>
       <td><div class="plats">${plats}</div></td>
-      <td><span class="cons ${g.switch2 ? "s2" : ""}">${g.switch2 ? "Switch 2" : "Switch"}</span></td>
+      <td>${chip("cons", String(g.cons), `cons${g.switch2 ? " s2" : ""}`, g.switch2 ? "Switch 2" : "Switch")}</td>
       <td><div class="mono">${esc(g.update)}</div>${recMine(g)}</td>
       <td class="pdate">${g.profileDate ? `<span title="${esc(fmtDateTime(g.profileDate))}">${fmtDate(g.profileDate)}</span>` : `<span class="iss-none">No profile</span>`}</td>
       <td>${issBtn}</td>
@@ -530,6 +542,12 @@ $("reset").addEventListener("click", () => { state.q = ""; state.f = blank(); sy
 
 const closeNotes = () => document.querySelectorAll("td.notes.open").forEach(td => { td.classList.remove("open"); td.style.height = ""; });
 $("rows").addEventListener("click", e => {
+  const c = e.target.closest(".chip-f");
+  if (c) {
+    const k = c.dataset.fk, v = c.dataset.fv, sel = state.f[k];
+    state.f[k] = sel.includes(v) ? sel.filter(x => x !== v) : [...sel, v];
+    syncControls(); render(); return;
+  }
   const more = e.target.closest(".nmore"), less = e.target.closest(".nless");
   if (less) { closeNotes(); return; }
   if (more) { const td = more.closest("td"); closeNotes(); td.style.height = td.getBoundingClientRect().height + "px"; td.classList.add("open"); return; }
