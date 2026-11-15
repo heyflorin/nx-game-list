@@ -201,6 +201,8 @@ td .ver { margin-top: 6px; }
 @media (max-width: 720px) { .stats-row { grid-template-columns: 1fr; } }
 .stats-row .stats { margin: 0; }
 .lib-actions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+.lib-note { flex-basis: 100%; margin: 0; max-width: 300px; margin-left: auto; text-align: right; font-size: 12.5px; color: var(--warn); }
+@media (max-width: 720px) { .lib-note { margin-left: 0; text-align: left; } }
 @media (max-width: 720px) { .lib-actions { justify-content: flex-start; } }
 .stat-btn { font: inherit; color: inherit; text-align: left; cursor: pointer; }
 .stat-btn:hover, .stat-btn[aria-expanded="true"] { border-color: var(--own); }
@@ -258,11 +260,14 @@ body[data-lib="none"] .c-lib, body[data-lib="none"] .own-only { display: none !i
 .own-yes { color: var(--own); background: var(--own-bg); cursor: default; }
 .own-yes:focus-visible { outline: 2px solid var(--own); outline-offset: 2px; }
 .own-cell { position: relative; }
-.own-pop { display: none; position: absolute; z-index: 16; top: calc(100% - 8px); left: 10px; width: max-content; max-width: 320px;
+.own-pop { display: none; position: absolute; z-index: 16; top: 40px; left: 10px; width: max-content; max-width: 320px;
   background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 9px 12px; box-shadow: 0 12px 32px rgb(0 0 0 / .18);
   font-size: 12.5px; color: var(--fg); flex-direction: column; gap: 3px; }
 .own-pop b { font-size: 10.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
 .own-pop span { font-family: var(--mono); font-size: 12px; overflow-wrap: anywhere; }
+.own-pop b + span, .own-pop span + b { margin-top: 0; }
+.own-pop span + b { margin-top: 6px; }
+.own-pop .of em { font: normal 600 10.5px var(--body); color: var(--own); margin-right: 6px; white-space: nowrap; }
 .own-cell:hover .own-pop, .own-yes:focus-visible + .own-pop { display: flex; }
 .own-no { color: var(--muted); font-size: 13px; }
 .empty { padding: 32px; text-align: center; color: var(--muted); }
@@ -291,6 +296,7 @@ footer a { color: inherit; }
       <div class="lib-actions">
         <button type="button" class="btn primary" id="lib-open">Check my games</button>
         <button type="button" class="btn" id="lib-forget" hidden>Forget my games</button>
+        <p class="lib-note" id="lib-old" hidden>Update checking has improved. Press <b>Update my games</b> once to re-read your folder.</p>
       </div>
     </div>
     <div class="lib-miss" id="lib-miss" hidden>
@@ -481,7 +487,7 @@ function render() {
     const detail = expanded.has(g.id) ? `<tr class="detail"><td colspan="9"><ul class="issue-list">${g.issues.map(i => `<li><span class="st st-${i.open ? "open" : "closed"}">${i.open ? "Open" : "Closed"}</span><span>${esc(i.t)} ${ref(i.r, i.n)}</span></li>`).join("")}</ul></td></tr>` : "";
     return `<tr class="${g.owned ? "mine" : ""}">
       <td><span class="name"><a href="${link}" target="_blank" rel="noopener">${esc(g.name)}</a></span><span class="tid-wrap"><span class="tid" tabindex="0" aria-describedby="src-${g.id}">${g.id}</span><span class="tid-pop" role="tooltip" id="src-${g.id}"><span class="tid-pop-in">Profile source: ${chip("src", g.srcKind, "src-chip", SRC_LABEL[g.srcKind])}</span></span></span></td>
-      <td class="c-lib own-cell">${g.owned ? `<button type="button" class="pill own-yes chip-f${on("own", "yes") ? " on" : ""}" data-fk="own" data-fv="yes" aria-pressed="${on("own", "yes")}" aria-describedby="own-${g.id}">Yes</button><span class="own-pop" role="tooltip" id="own-${g.id}"><b>Found in your folder</b>${LIB.owned[g.id].where.map(w => `<span>${esc(w)}</span>`).join("")}</span>` : chip("own", "no", "own-no", "No")}</td>
+      <td class="c-lib own-cell">${g.owned ? `<button type="button" class="pill own-yes chip-f${on("own", "yes") ? " on" : ""}" data-fk="own" data-fv="yes" aria-pressed="${on("own", "yes")}" aria-describedby="own-${g.id}">Yes</button><span class="own-pop" role="tooltip" id="own-${g.id}"><b>Found in your folder</b>${LIB.owned[g.id].where.map(w => `<span>${esc(w)}</span>`).join("")}${(LIB.owned[g.id].files || []).length ? `<b>Files read</b>${LIB.owned[g.id].files.map(f => `<span class="of"><em>${f.kind === "dlc" ? "DLC" : f.kind === "update" ? "Update" : "Base"}${f.v ? " " + esc(f.v) : ""}</em>${esc(f.name)}</span>`).join("")}` : ""}</span>` : chip("own", "no", "own-no", "No")}</td>
       <td>${chip("tier", g.tier, `pill t-${g.tier.replace(/[^A-Za-z]+/g, "-")}`, g.tier, g.status)}</td>
       <td><div class="plats">${plats}</div></td>
       <td>${chip("cons", String(g.cons), `cons${g.switch2 ? " s2" : ""}`, g.switch2 ? "Switch 2" : "Switch")}</td>
@@ -638,6 +644,15 @@ function versionsIn(names) {
   }
   return { vnum, disp };
 }
+// A Switch title ID ends in 000 for the base game, 800 for its update, and anything else for a DLC.
+function kindOf(file, inner) {
+  if (!file) return inner.includes("updates") ? "update" : "base";       // a Switch 2 dump folder
+  const m = file.match(/(?<![0-9a-f])0[14]00[0-9a-f]{9}([0-9a-f]{3})(?![0-9a-f])/i);
+  if (m) return m[1].toUpperCase() === "000" ? "base" : m[1].toUpperCase() === "800" ? "update" : "dlc";
+  if (/\b(dlc|add[- ]?on|expansion|season pass)\b/i.test(file)) return "dlc";
+  if (/\b(update|upd|patch)\b/i.test(file)) return "update";
+  return "base";
+}
 const stemOf = n => n.replace(GAME_EXT, "").replace(/\s*\[[^\]]*\]|\s*\([^)]*\)/g, "").replace(/\s*\+\s*update.*$/i, "").trim() || n;
 
 function scanPaths(paths) {
@@ -658,18 +673,40 @@ function scanPaths(paths) {
     units.get(key).inner.push(...inner);
   }
   const owned = {}, loose = [];
+  // first pass: match each file on its own
   for (const u of units.values()) {
-    const dirs = u.dump ? u.segs : u.segs.slice(0, -1);
-    const file = u.dump ? "" : u.segs[u.segs.length - 1];
+    u.dirs = u.dump ? u.segs : u.segs.slice(0, -1);
+    u.file = u.dump ? "" : u.segs[u.segs.length - 1];
+    u.id = idFrom([...u.segs, ...u.inner]) || (u.file && idByName(stemOf(u.file))) || [...u.dirs].reverse().map(idByName).find(Boolean) || null;
+  }
+  // second pass: a file that matched nothing (ACNH_3.0.3.nsp, "Update.nsp") belongs to the game whose other files
+  // share its folder, when that folder holds only one game
+  const idsInDir = new Map();
+  for (const u of units.values()) if (u.id && u.dirs.length) {
+    const k = u.dirs.join("/"); if (!idsInDir.has(k)) idsInDir.set(k, new Set()); idsInDir.get(k).add(u.id);
+  }
+  for (const u of units.values()) if (!u.id && u.dirs.length) {
+    const s = idsInDir.get(u.dirs.join("/")); if (s && s.size === 1) u.id = [...s][0];
+  }
+  for (const u of units.values()) {
+    const dirs = u.dirs, file = u.file, id = u.id;
     const names = [...u.segs, ...u.inner];
-    const id = idFrom(names) || (file && idByName(stemOf(file))) || [...dirs].reverse().map(idByName).find(Boolean) || null;
+    const kind = kindOf(file, u.inner);
     const v = versionsIn(names);
     u.inner.forEach((x, i) => { if (u.inner[i - 1] === "updates" && /^\d{5,}$/.test(x)) v.vnum.push(+x); });
+    if (kind !== "dlc" && file) {
+      // game and update files are often named with a bare version: ACNH_3.0.3.nsp, [2228224]
+      for (const m of file.replace(GAME_EXT, "").matchAll(/(?<![\d.])(\d+\.\d+\.\d+(?:\.\d+)?)(?![\d.])/g)) v.disp.push(m[1]);
+      for (const m of file.matchAll(/\[(\d{5,8})\]/g)) v.vnum.push(+m[1]);
+    }
     if (id) {
-      const o = owned[id] || (owned[id] = { where: [], vnum: [], disp: [] });
+      const o = owned[id] || (owned[id] = { where: [], vnum: [], disp: [], files: [] });
       const where = dirs.length ? dirs.join(" / ") : stemOf(file);
       if (!o.where.includes(where)) o.where.push(where);
-      o.vnum.push(...v.vnum); o.disp.push(...v.disp);
+      // a DLC's version is its own, not the game's: it never counts toward the game's update
+      if (kind !== "dlc") { o.vnum.push(...v.vnum); o.disp.push(...v.disp); }
+      if (o.files.length < 12) o.files.push({ name: file || u.segs[u.segs.length - 1], kind,
+        v: kind === "dlc" ? "" : [...new Set(v.disp)].sort(vcmp).pop() || (v.vnum.length ? `v${Math.max(...v.vnum)}` : "") });
     } else loose.push({ dirs, stem: stemOf(file || dirs[dirs.length - 1] || "") });
   }
   // A folder whose unmatched files are one game is named by the folder; a folder holding several (such as
@@ -688,7 +725,7 @@ function scanPaths(paths) {
       missing.set(group + "|" + name, { name, group });
     }
   }
-  return { name: root || "selected files", read: Date.now(), owned, missing: [...missing.values()], units: units.size };
+  return { fmt: 2, name: root || "selected files", read: Date.now(), owned, missing: [...missing.values()], units: units.size };
 }
 
 const vkey = v => v.split(".").map(Number);
@@ -710,7 +747,8 @@ function compareCopy(g, o) {
   if (upD.length && recD.length) { const d = upD[upD.length - 1]; return { v: d, src: "from your file names", state: recD.every(r => vcmp(d, r) < 0) ? "old" : "new" }; }
   if (upV.length && recV.length) { const v = Math.max(...upV); return { v: recShown(v), src: "from your file names", state: v < Math.max(...recV) ? "old" : "new" }; }
   if (vnums.includes(0) || disps.includes("1.0.0")) return { v: "base game only", src: "from your file names", state: recV.includes(0) ? "match" : "old" };
-  return { v: "", src: found ? "from your file names" : "no version in your file names", state: "unknown" };
+  const upd = (o.files || []).some(f => f.kind === "update");
+  return { v: "", src: upd ? "an update file was found, but its name has no version" : found ? "from your file names" : "no version in your file names", state: "unknown" };
 }
 
 let LIB = null;
@@ -731,6 +769,7 @@ function applyLibrary() {
   if (LIB) st.textContent = `Last read: ${n} of the ${n + miss.length} games in “${LIB.name}” are on the list (${new Date(LIB.read).toLocaleDateString()}). Choose a folder again to update.`;
   $("lib-open").textContent = LIB ? "Update my games" : "Check my games";
   $("lib-forget").hidden = !LIB;
+  $("lib-old").hidden = !(LIB && LIB.fmt !== 2);
   if (!miss.length) $("lib-miss").hidden = true;
   $("lib-miss-h").textContent = `In your folder, not on the list (${miss.length})`;
   $("missing").innerHTML = miss.map(m => {
