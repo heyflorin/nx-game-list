@@ -24,7 +24,7 @@ Open the page (GitHub Pages, or `index.html` in any browser), press **Check my g
 - **Title IDs first:** a title ID in a file or folder name, such as `[0100000000010000]`. The ID of an update (`…800`) or a DLC (`…1xxx`) leads to its base game.
 - **Names second:** if there is no ID, the file name and then its folders are compared with the list's game names. Common short names (for example "TOTK") are in `ALIASES` in `tools/curation.py`.
 - **Versions:** each file is sorted into base game, update or DLC, by its title ID (an update ends in `800`, a DLC in anything other than `000`) or by words like "Update" or "DLC" in its name. Only base game and update files count toward your version; a DLC's own version never does. Versions are read from names such as `[v393216]`, `[1.2.1]`, `Update 1.1.0` or `ACNH_3.0.3.nsp`, and from a dump's `updates/<version>` folder. A file with no title ID or recognizable name belongs to the game whose other files share its folder. Your copy matches when any version found is the recommended one, in either form.
-- **What was read:** hovering "Yes" in the Owned column lists the folder and each file that was read, with its kind and version.
+- **What was read:** hovering a game's title ID shows whether it was found in your folder, where, and each file that was read, with its kind and version. Your games are also highlighted in purple.
 - **Games with no profile** are listed under "In your folder, not on the list".
 
 ## Where the data comes from

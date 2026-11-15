@@ -92,7 +92,7 @@ tr.mine td:first-child { box-shadow: inset 3px 0 0 var(--own); }
 .tid { display: inline-block; font: 11px var(--mono); color: var(--muted); border-bottom: 1px dotted var(--line); cursor: default; }
 .tid:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .tid-pop { display: none; position: absolute; z-index: 16; top: 100%; left: -6px; padding-top: 6px; }
-.tid-pop-in { display: flex; align-items: center; gap: 8px; white-space: nowrap; background: var(--surface); border: 1px solid var(--line);
+.tid-pop-in { display: flex; flex-direction: column; align-items: flex-start; gap: 7px; width: max-content; max-width: min(380px, calc(100vw - 48px)); background: var(--surface); border: 1px solid var(--line);
   border-radius: 10px; padding: 8px 10px; box-shadow: 0 12px 32px rgb(0 0 0 / .18); font-size: 12px; color: var(--muted); }
 .tid-wrap:hover .tid-pop, .tid-wrap:focus-within .tid-pop { display: block; }
 button.src-chip { font: 600 11.5px var(--body); color: var(--accent); background: var(--accent-soft); border: 1px solid transparent; border-radius: 99px; padding: 2px 9px; }
@@ -262,19 +262,14 @@ dialog#priv-dlg h2 { font: 700 22px var(--display); margin: 0 0 6px; padding-rig
 .lib-miss li b { color: var(--fg); font-weight: 500; }
 body[data-lib="none"] .c-lib, body[data-lib="none"] .own-only { display: none !important; }
 
-.own-yes { color: var(--own); background: var(--own-bg); cursor: default; }
-.own-yes:focus-visible { outline: 2px solid var(--own); outline-offset: 2px; }
-.own-cell { position: relative; }
-.own-pop { display: none; position: absolute; z-index: 16; top: 40px; left: 10px; width: max-content; max-width: 320px;
-  background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 9px 12px; box-shadow: 0 12px 32px rgb(0 0 0 / .18);
-  font-size: 12.5px; color: var(--fg); flex-direction: column; gap: 3px; }
-.own-pop b { font-size: 10.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
-.own-pop span { font-family: var(--mono); font-size: 12px; overflow-wrap: anywhere; }
-.own-pop b + span, .own-pop span + b { margin-top: 0; }
-.own-pop span + b { margin-top: 6px; }
-.own-pop .of em { font: normal 600 10.5px var(--body); color: var(--own); margin-right: 6px; white-space: nowrap; }
-.own-cell:hover .own-pop, .own-yes:focus-visible + .own-pop { display: flex; }
-.own-no { color: var(--muted); font-size: 13px; }
+.tp-row { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+button.own-chip { font: 600 11.5px var(--body); color: var(--own); background: var(--own-bg); border: 1px solid transparent; border-radius: 99px; padding: 2px 9px; }
+button.own-chip.no { color: var(--muted); background: var(--bg); }
+.tp-detail { display: flex; flex-direction: column; gap: 3px; border-top: 1px solid var(--line); padding-top: 7px; width: 100%; color: var(--fg); }
+.tp-detail b { font-size: 10.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.tp-detail span { font: 12px var(--mono); overflow-wrap: anywhere; }
+.tp-detail span + b { margin-top: 5px; }
+.tp-detail .of em { font: normal 600 10.5px var(--body); color: var(--own); margin-right: 6px; white-space: nowrap; }
 .empty { padding: 32px; text-align: center; color: var(--muted); }
 .missing { margin-top: 26px; background: var(--surface); border: 1px dashed var(--line); border-radius: 10px; padding: 14px 16px; }
 .missing h2 { font: 600 17px var(--display); margin: 0 0 4px; }
@@ -323,7 +318,6 @@ footer a { color: inherit; }
     <table>
       <thead><tr>
         <th data-k="name" aria-sort="ascending"><button type="button">Game and title ID</button></th>
-        <th data-k="owned" class="c-lib"><button type="button">Owned</button></th>
         <th data-k="rank"><button type="button">How well it runs</button></th>
         <th data-k="plat"><button type="button">Runs on</button></th>
         <th data-k="cons"><button type="button">Console</button></th>
@@ -428,6 +422,10 @@ const OPT_INFO = {
   },
 };
 const blank = () => Object.fromEntries(FILTERS.map(f => [f.k, []]));
+function ownDetail(g) {
+  const o = LIB.owned[g.id];
+  return `<span class="tp-detail"><b>Where</b>${o.where.map(w => `<span>${esc(w)}</span>`).join("")}${(o.files || []).length ? `<b>Files read</b>${o.files.map(f => `<span class="of"><em>${f.kind === "dlc" ? "DLC" : f.kind === "update" ? "Update" : "Base"}${f.v ? " " + esc(f.v) : ""}</em>${esc(f.name)}</span>`).join("")}` : ""}</span>`;
+}
 const SRC_LABEL = Object.fromEntries(FILTERS.find(f => f.k === "src").opts);
 const state = { q: "", f: blank(), sort: "name", dir: 1 };
 try { const s = JSON.parse(localStorage.getItem("nxn-filters-v3") || "{}"); if (s.f) Object.assign(state, s, { f: Object.assign(blank(), s.f) }); } catch (e) {}
@@ -471,7 +469,6 @@ function match(g) { return matchExcept(g, null); }
 function cmp(a, b) {
   const k = state.sort;
   let x = a[k], y = b[k];
-  if (k === "owned") { x = a.owned ? 0 : 1; y = b.owned ? 0 : 1; }
   if (k === "nopen") { x = -a.nopen; y = -b.nopen; }
   if (k === "pdate") { x = a.profileDate || a.issueDate || "0"; y = b.profileDate || b.issueDate || "0"; }
   if (k === "plat") { x = -a.plat; y = -b.plat; }
@@ -491,10 +488,9 @@ function render() {
     const reps = g.reports.length ? `<ul class="reports">${g.reports.map(r => `<li><span class="k k-${r.k}">${LBL[r.k]}</span><span>${esc(r.t)} ${ref(r.r, r.n)}</span></li>`).join("")}</ul>` : "";
     const nc = g.issues.length - g.nopen;
     const issBtn = g.issues.length ? `<button type="button" class="iss-btn" data-id="${g.id}" aria-expanded="${expanded.has(g.id)}">${g.nopen ? `<b>${g.nopen} open</b> · ` : ""}${nc} closed</button>` : `<span class="iss-none">None</span>`;
-    const detail = expanded.has(g.id) ? `<tr class="detail"><td colspan="9"><ul class="issue-list">${g.issues.map(i => `<li><span class="st st-${i.open ? "open" : "closed"}">${i.open ? "Open" : "Closed"}</span><span>${esc(i.t)} ${ref(i.r, i.n)}</span></li>`).join("")}</ul></td></tr>` : "";
+    const detail = expanded.has(g.id) ? `<tr class="detail"><td colspan="8"><ul class="issue-list">${g.issues.map(i => `<li><span class="st st-${i.open ? "open" : "closed"}">${i.open ? "Open" : "Closed"}</span><span>${esc(i.t)} ${ref(i.r, i.n)}</span></li>`).join("")}</ul></td></tr>` : "";
     return `<tr class="${g.owned ? "mine" : ""}">
-      <td><span class="name"><a href="${link}" target="_blank" rel="noopener">${esc(g.name)}</a></span><span class="tid-wrap"><span class="tid" tabindex="0" aria-describedby="src-${g.id}">${g.id}</span><span class="tid-pop" role="tooltip" id="src-${g.id}"><span class="tid-pop-in">Profile source: ${chip("src", g.srcKind, "src-chip", SRC_LABEL[g.srcKind])}</span></span></span></td>
-      <td class="c-lib own-cell">${g.owned ? `<button type="button" class="pill own-yes chip-f${on("own", "yes") ? " on" : ""}" data-fk="own" data-fv="yes" aria-pressed="${on("own", "yes")}" aria-describedby="own-${g.id}">Yes</button><span class="own-pop" role="tooltip" id="own-${g.id}"><b>Found in your folder</b>${LIB.owned[g.id].where.map(w => `<span>${esc(w)}</span>`).join("")}${(LIB.owned[g.id].files || []).length ? `<b>Files read</b>${LIB.owned[g.id].files.map(f => `<span class="of"><em>${f.kind === "dlc" ? "DLC" : f.kind === "update" ? "Update" : "Base"}${f.v ? " " + esc(f.v) : ""}</em>${esc(f.name)}</span>`).join("")}` : ""}</span>` : chip("own", "no", "own-no", "No")}</td>
+      <td><span class="name"><a href="${link}" target="_blank" rel="noopener">${esc(g.name)}</a></span><span class="tid-wrap"><span class="tid" tabindex="0" aria-describedby="src-${g.id}">${g.id}</span><span class="tid-pop" role="tooltip" id="src-${g.id}"><span class="tid-pop-in"><span class="tp-row">Profile source: ${chip("src", g.srcKind, "src-chip", SRC_LABEL[g.srcKind])}</span>${LIB ? `<span class="tp-row">In your folder: ${g.owned ? chip("own", "yes", "own-chip", "Found") : chip("own", "no", "own-chip no", "Not found")}</span>${g.owned ? ownDetail(g) : ""}` : ""}</span></span></span></td>
       <td>${chip("tier", g.tier, `pill t-${g.tier.replace(/[^A-Za-z]+/g, "-")}`, g.tier, g.status)}</td>
       <td><div class="plats">${plats}</div></td>
       <td>${chip("cons", String(g.cons), `cons${g.switch2 ? " s2" : ""}`, g.switch2 ? "Switch 2" : "Switch")}</td>
