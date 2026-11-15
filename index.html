@@ -908,7 +908,7 @@ document.addEventListener("keydown", e => { if (e.key === "Escape" && !about.hid
 {
   const m = DATA.meta || {}, n = x => (x || 0).toLocaleString();
   const latestProfile = GAMES.map(g => g.profileDate).filter(Boolean).sort().pop();
-  const tag = (label, d, title) => d ? `<span class="about-tag" title="${esc(title)}">${label} <b>${esc(fmtDate(d))}</b></span>` : "";
+  const tag = (label, d, title) => d ? `<span class="about-tag" title="${esc(title)}">${label} <b>${esc(fmtDateTime(d))}</b></span>` : "";
   $("about-tags").innerHTML =
     tag("Game profiles updated", latestProfile, `Latest change to an nxnative game profile: ${latestProfile ? fmtDateTime(latestProfile) : ""}${m.nxnative_commit ? ` (nxnative commit ${m.nxnative_commit})` : ""}`) +
     tag("List updated", m.checked, `This list was last rebuilt with new data: ${m.checked ? fmtDateTime(m.checked) : ""}`);
