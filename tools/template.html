@@ -204,6 +204,9 @@ td .ver { margin-top: 6px; }
 @media (max-width: 720px) { .lib-actions { justify-content: flex-start; } }
 .stat-btn { font: inherit; color: inherit; text-align: left; cursor: pointer; }
 .stat-btn:hover, .stat-btn[aria-expanded="true"] { border-color: var(--own); }
+.stat-btn.recipe:not(.own):hover { border-color: var(--accent); }
+.stat-btn.recipe.on { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); background: var(--accent-soft); }
+.stat-btn.recipe.own.on { border-color: var(--own); box-shadow: 0 0 0 1px var(--own); background: var(--own-bg); }
 .stat-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .dlg-status { margin: -8px 0 16px; padding: 9px 12px; border-radius: 8px; background: var(--bg); font-size: 13.5px; color: var(--fg); }
 .dlg-busy { display: flex; align-items: center; gap: 12px; margin: -8px 0 16px; padding: 12px 14px; border-radius: 8px; background: var(--bg);
@@ -416,15 +419,32 @@ const SRC_LABEL = Object.fromEntries(FILTERS.find(f => f.k === "src").opts);
 const state = { q: "", f: blank(), sort: "name", dir: 1 };
 try { const s = JSON.parse(localStorage.getItem("nxn-filters-v3") || "{}"); if (s.f) Object.assign(state, s, { f: Object.assign(blank(), s.f) }); } catch (e) {}
 
+// Each tile is a filter recipe: clicking it sets exactly these filters (and clears the rest); clicking it again clears them.
+const PHONE = ["Verified", "Playable"];
+const RECIPES = [
+  { label: "games", f: {} },
+  { label: "reported working in issues", f: { tier: ["Reported working"] } },
+  { label: "playable on iPhone", f: { tier: PHONE } },
+  { label: "Switch", f: { cons: ["1"] } },
+  { label: "Switch 2", f: { cons: ["2"] } },
+  { label: "of yours are on the list", f: { own: ["yes"] }, own: true },
+  { label: "of yours playable on iPhone", f: { own: ["yes"], tier: PHONE }, own: true },
+  { label: "of yours with open issues", f: { own: ["yes"], probs: ["open"] }, own: true },
+];
+const recipeState = r => Object.assign(blank(), JSON.parse(JSON.stringify(r.f)));
+const sameFilters = (a, b) => FILTERS.every(f => [...a[f.k]].sort().join("|") === [...b[f.k]].sort().join("|"));
+const recipeCount = r => { const f = recipeState(r); return GAMES.filter(g => FILTERS.every(x => !f[x.k].length || f[x.k].some(v => x.test(g, v)))).length; };
 function stats() {
-  const own = GAMES.filter(g => g.owned);
-  const phone = g => g.tier === "Verified" || g.tier === "Playable";
-  const items = [[GAMES.length, "games"], [GAMES.filter(g => g.tier === "Reported working").length, "reported working in issues"], [GAMES.filter(phone).length, "playable on iPhone"],
-    [GAMES.filter(g => !g.switch2).length, "Switch"], [GAMES.filter(g => g.switch2).length, "Switch 2"], [own.length, "of yours are on the list", "own own-only"],
-    [own.filter(phone).length, "of yours playable on iPhone", "own own-only"], [own.filter(g => g.openBad).length, "of yours with open issues", "own own-only"]];
   const miss = LIB ? LIB.missing.length : 0;
-  $("stats").innerHTML = items.map(([n, l, c]) => `<div class="stat ${c || ""}"><b>${n}</b><small>${l}</small></div>`).join("") +
+  $("stats").innerHTML = RECIPES.map((r, i) => `<button type="button" class="stat stat-btn recipe${r.own ? " own own-only" : ""}" data-r="${i}" aria-pressed="false" title="Show these games"><b>${recipeCount(r)}</b><small>${r.label}</small></button>`).join("") +
     (miss ? `<button type="button" class="stat own own-only stat-btn" id="miss-btn" aria-controls="lib-miss" aria-expanded="${!$("lib-miss").hidden}"><b>${miss}</b><small>in your folder, not on the list</small></button>` : "");
+  markRecipes();
+}
+function markRecipes() {
+  document.querySelectorAll("#stats .recipe").forEach(b => {
+    const r = RECIPES[+b.dataset.r], on = !state.q.trim() && sameFilters(state.f, recipeState(r)) && Object.keys(r.f).length > 0;
+    b.classList.toggle("on", on); b.setAttribute("aria-pressed", String(on));
+  });
 }
 
 function matchExcept(g, skip) {
@@ -494,6 +514,7 @@ function buildFilters() {
     <button type="button" class="clr">Clear</button></div></details></div>`).join("");
 }
 function syncControls() {
+  if (typeof markRecipes === "function" && document.querySelector("#stats .recipe")) markRecipes();
   document.querySelectorAll(".legend .chip-f").forEach(b => { b.parentElement.hidden = !GAMES.some(g => g.tier === b.dataset.fv); const on = state.f[b.dataset.fk].includes(b.dataset.fv); b.classList.toggle("on", on); b.setAttribute("aria-pressed", String(on)); });
   $("q").value = state.q;
   document.querySelectorAll(".ms").forEach(d => {
@@ -814,6 +835,14 @@ dlg.addEventListener("close", () => { walkStop = true; busy(false); });
 const openDlg = () => { if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", ""); };
 $("lib-open").addEventListener("click", () => { applyLibrary(); openDlg(); });
 $("stats").addEventListener("click", e => {
+  const rb = e.target.closest(".recipe");
+  if (rb) {
+    const r = RECIPES[+rb.dataset.r];
+    state.f = rb.classList.contains("on") ? blank() : recipeState(r);
+    state.q = "";
+    syncControls(); render();
+    return;
+  }
   const b = e.target.closest("#miss-btn"); if (!b) return;
   const m = $("lib-miss"); m.hidden = !m.hidden; b.setAttribute("aria-expanded", String(!m.hidden));
 });
