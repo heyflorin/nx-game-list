@@ -49,6 +49,10 @@ h1 span { color: var(--accent); }
 .about { position: absolute; z-index: 30; top: calc(100% + 10px); left: 0; width: min(560px, calc(100vw - 32px)); background: var(--surface);
   border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; box-shadow: 0 14px 40px rgb(0 0 0 / .18); }
 .about a { color: var(--fg); text-underline-offset: 2px; }
+.about-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); }
+.about-tag { display: inline-flex; align-items: baseline; gap: 6px; padding: 3px 10px; border-radius: 99px; background: var(--bg); border: 1px solid var(--line);
+  font-size: 12px; color: var(--muted); white-space: nowrap; }
+.about-tag b { font-weight: 600; color: var(--fg); font-variant-numeric: tabular-nums; }
 .about p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.55; }
 
 .lede a { color: inherit; }
@@ -291,7 +295,7 @@ footer a { color: inherit; }
     <div class="title-row">
       <h1>Game <span>Compatibility List</span></h1>
       <button type="button" class="info-btn" id="about-btn" aria-expanded="false" aria-controls="about" aria-label="About this list">i</button>
-      <div class="about" id="about" role="dialog" aria-label="About this list" hidden><p>Every game the <a href="https://github.com/seedds/nxnative" target="_blank" rel="noopener">nxnative</a> engine has a profile for, plus games people report in its issues, with how well it runs, where it runs, the update it wants, and, once you choose your games folder, which ones you have. Sources: the engine's <a href="https://github.com/seedds/nxnative/tree/main/dm/games" target="_blank" rel="noopener">dm/games</a> profiles, NX2Apple's <a href="https://github.com/LNPANDY/NX2Apple/blob/main/GAMES.md" target="_blank" rel="noopener">GAMES.md</a>, and every open and closed issue in <a href="https://github.com/seedds/nxnative/issues?q=is%3Aissue" target="_blank" rel="noopener">nxnative</a> and <a href="https://github.com/LNPANDY/NX2Apple/issues?q=is%3Aissue" target="_blank" rel="noopener">NX2Apple</a>.</p></div>
+      <div class="about" id="about" role="dialog" aria-label="About this list" hidden><p>Every game the <a href="https://github.com/seedds/nxnative" target="_blank" rel="noopener">nxnative</a> engine has a profile for, plus games people report in its issues, with how well it runs, where it runs, the update it wants, and, once you choose your games folder, which ones you have. Sources: the engine's <a href="https://github.com/seedds/nxnative/tree/main/dm/games" target="_blank" rel="noopener">dm/games</a> profiles, NX2Apple's <a href="https://github.com/LNPANDY/NX2Apple/blob/main/GAMES.md" target="_blank" rel="noopener">GAMES.md</a>, and every open and closed issue in <a href="https://github.com/seedds/nxnative/issues?q=is%3Aissue" target="_blank" rel="noopener">nxnative</a> and <a href="https://github.com/LNPANDY/NX2Apple/issues?q=is%3Aissue" target="_blank" rel="noopener">NX2Apple</a>.</p><div class="about-tags" id="about-tags"></div></div>
     </div>
     <div class="stats-row">
       <div class="stats" id="stats"></div>
@@ -903,6 +907,11 @@ document.addEventListener("click", e => { if (!about.hidden && !about.contains(e
 document.addEventListener("keydown", e => { if (e.key === "Escape" && !about.hidden) { setAbout(false); aboutBtn.focus(); } });
 {
   const m = DATA.meta || {}, n = x => (x || 0).toLocaleString();
+  const latestProfile = GAMES.map(g => g.profileDate).filter(Boolean).sort().pop();
+  const tag = (label, d, title) => d ? `<span class="about-tag" title="${esc(title)}">${label} <b>${esc(fmtDate(d))}</b></span>` : "";
+  $("about-tags").innerHTML =
+    tag("Game profiles updated", latestProfile, `Latest change to an nxnative game profile: ${latestProfile ? fmtDateTime(latestProfile) : ""}${m.nxnative_commit ? ` (nxnative commit ${m.nxnative_commit})` : ""}`) +
+    tag("List updated", m.checked, `This list was last rebuilt with new data: ${m.checked ? fmtDateTime(m.checked) : ""}`);
   const when = m.checked ? fmtDateTime(m.checked) : "";
   $("src-line").textContent = `Sources: ${n(m.profiles)} nxnative profiles${m.nxnative_commit ? ` (commit ${m.nxnative_commit}, ${m.nxnative_date ? fmtDate(m.nxnative_date) : ""})` : ""}, NX2Apple's GAMES.md, ` +
     `and all ${n(m.issues_nx)} issues in seedds/nxnative and ${n(m.issues_app)} in LNPANDY/NX2Apple, open and closed.${when ? ` List last updated ${when}.` : ""}`;
