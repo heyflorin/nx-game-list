@@ -641,6 +641,7 @@ function versionsIn(names) {
   for (const n of names) {
     for (const m of n.matchAll(/\[v(\d+)\]|\bv(\d{5,})\b/gi)) vnum.push(+(m[1] || m[2]));
     for (const m of n.matchAll(/(?:update|\[v|\bv)\s*(\d+(?:\.\d+){1,3})/gi)) disp.push(m[1]);
+    for (const m of n.matchAll(/[\[(]v?(\d+(?:\.\d+){1,3})[\])]/gi)) disp.push(m[1]);   // [1.2.1] or (1.2.1)
   }
   return { vnum, disp };
 }
@@ -702,17 +703,21 @@ const vcmp = (a, b) => { const x = vkey(a), y = vkey(b); for (let i = 0; i < Mat
 function compareCopy(g, o) {
   const rec = g.update;
   const recV = [...rec.matchAll(/\bv(\d+)/g)].map(m => +m[1]), recD = rec.match(/\d+(?:\.\d+)+/g) || [];
-  const haveV = o.vnum.length ? Math.max(...o.vnum) : null;
-  const haveD = o.disp.length ? [...o.disp].sort(vcmp).pop() : "";
-  const found = haveV !== null || !!haveD;
-  let state = "unknown", src = found ? "from your file names" : "no version in your file names";
-  if (rec === "—") src = "no profile, so no recommended update";
-  else if (/^None|\(base\)/.test(rec)) { state = "match"; src = "the base game is enough"; }
-  else if (haveV !== null && recV.length) state = recV.includes(haveV) ? "match" : haveV < Math.max(...recV) ? "old" : "new";
-  else if (haveD && recD.length) state = recD.includes(haveD) ? "match" : recD.every(r => vcmp(haveD, r) < 0) ? "old" : "new";
-  const m = haveV !== null ? rec.match(new RegExp(`([\\d.]+) \\(v${haveV}\\)`)) : null;
-  const shown = haveD || (m ? `${m[1]} (v${haveV})` : haveV ? `v${haveV}` : haveV === 0 ? "base game only" : "");
-  return { v: shown, src, state };
+  // v0 is the base game itself; it says nothing about the update when the names also carry an update's version
+  const vnums = [...new Set(o.vnum)], disps = [...new Set(o.disp)].sort(vcmp);
+  const upV = vnums.filter(v => v > 0), upD = disps.filter(d => vcmp(d, "1.0.0") > 0);
+  const found = vnums.length > 0 || disps.length > 0;
+  const recShown = (v, d) => { const m = v != null ? rec.match(new RegExp(`([\\d.]+) \\(v${v}\\)`)) : null; return m ? `${m[1]} (v${v})` : d ? (recD.includes(d) ? rec.match(new RegExp(`${d.replace(/\./g, "\\.")}(?: \\(v\\d+\\))?`))[0] : d) : `v${v}`; };
+  if (rec === "—") return { v: disps.pop() || (upV.length ? `v${Math.max(...upV)}` : ""), src: "no profile, so no recommended update", state: "unknown" };
+  if (/^None|\(base\)/.test(rec)) return { v: "", src: "the base game is enough", state: "match" };
+  // up to date when any version in the names is the recommended one, in either form
+  const hitV = vnums.find(v => recV.includes(v)), hitD = disps.find(d => recD.includes(d));
+  if (hitV != null || hitD) return { v: recShown(hitV, hitD), src: "from your file names", state: "match" };
+  // otherwise compare the newest update version in the names with the recommended one
+  if (upD.length && recD.length) { const d = upD[upD.length - 1]; return { v: d, src: "from your file names", state: recD.every(r => vcmp(d, r) < 0) ? "old" : "new" }; }
+  if (upV.length && recV.length) { const v = Math.max(...upV); return { v: recShown(v), src: "from your file names", state: v < Math.max(...recV) ? "old" : "new" }; }
+  if (vnums.includes(0) || disps.includes("1.0.0")) return { v: "base game only", src: "from your file names", state: recV.includes(0) ? "match" : "old" };
+  return { v: "", src: found ? "from your file names" : "no version in your file names", state: "unknown" };
 }
 
 let LIB = null;
