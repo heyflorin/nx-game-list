@@ -37,7 +37,7 @@ Ratings that come from the notes are matched by their wording, so a few may be o
 
 ## Refresh the data
 
-**Automatically:** the workflow in `.github/workflows/refresh.yml` runs `refresh.sh` every day at 06:17 UTC. It commits only when the games data changed, and that push redeploys GitHub Pages. To run it now, open the **Actions** tab, choose **Refresh the list**, then **Run workflow**. It needs no setup: it uses the repository's own Actions token.
+**Automatically:** the workflow in `.github/workflows/refresh.yml` runs `refresh.sh` every hour, at 17 minutes past. It commits only when the games data changed, and that push redeploys GitHub Pages. To run it now, open the **Actions** tab, choose **Refresh the list**, then **Run workflow**. It needs no setup: it uses the repository's own Actions token.
 
 What it updates on its own:
 - nxnative's profiles: new games, ratings from their notes, recommended updates, and profile dates

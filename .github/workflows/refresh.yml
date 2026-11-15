@@ -1,11 +1,11 @@
-# Re-checks every source once a day and publishes the list when it changed.
+# Re-checks every source every hour and publishes the list when it changed.
 # Runs refresh.sh (nxnative profiles, NX2Apple's GAMES.md, both repos' issues), then commits index.html and data/
 # only when the games data changed; that push redeploys GitHub Pages. Start it by hand from the Actions tab too.
 name: Refresh the list
 
 on:
   schedule:
-    - cron: "17 6 * * *"   # every day at 06:17 UTC
+    - cron: "17 * * * *"   # every hour, at 17 minutes past
   workflow_dispatch:
 
 permissions:
