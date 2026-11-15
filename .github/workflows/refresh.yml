@@ -1,0 +1,45 @@
+# Re-checks every source once a day and publishes the list when it changed.
+# Runs refresh.sh (nxnative profiles, NX2Apple's GAMES.md, both repos' issues), then commits index.html and data/
+# only when the games data changed; that push redeploys GitHub Pages. Start it by hand from the Actions tab too.
+name: Refresh the list
+
+on:
+  schedule:
+    - cron: "17 6 * * *"   # every day at 06:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Re-check every source and rebuild the page
+        env:
+          GH_TOKEN: ${{ github.token }}   # the issue search uses gh
+        run: ./refresh.sh
+
+      - name: Publish when the page changed
+        run: |
+          # data/data.json holds the games as shown; the page's check time alone is not a change
+          if git diff --quiet -- data/data.json; then
+            echo "No change to the list."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add -A index.html data
+          git commit -m "Refresh the list ($(date -u +%Y-%m-%d))"
+          git push

@@ -1,0 +1,1146 @@
+[
+{
+"name": "Super Mario Odyssey",
+"id": "0100000000010000",
+"update": "1.4.1 (v393216)",
+"status": "Playable on an iPhone (upstream)",
+"note": "",
+"switch2": false
+},
+{
+"name": "Pokémon Brilliant Diamond",
+"id": "0100000011D90000",
+"update": "1.3.0 (v393216)",
+"status": "Playable on an iPhone (upstream)",
+"note": "60 fps with 1.3.0",
+"switch2": false
+},
+{
+"name": "Ace Attorney Investigations Collection",
+"id": "010005501E68C000",
+"update": "1.0.0.2 (v131072)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Metroid Prime Remastered",
+"id": "010012101468C000",
+"update": "None (v0)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Hollow Knight: Silksong",
+"id": "010013C00E930000",
+"update": "1.0.30000 (v655360)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Subnautica: Below Zero",
+"id": "010014C011146000",
+"update": "1.23.55063 (v655360)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Digimon Story Cyber Sleuth: Complete Edition",
+"id": "010014E00DB56000",
+"update": "1.0.3 (v196608)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Super Mario Bros. Wonder",
+"id": "010015100B514000",
+"update": "1.2.1 (v327680)",
+"status": "Playable on an iPhone (upstream)",
+"note": "",
+"switch2": false
+},
+{
+"name": "Mario Kart 8 Deluxe",
+"id": "0100152000022000",
+"update": "4.0.1 (v1507328)",
+"status": "Playable on an iPhone (upstream)",
+"note": "no Mii heads",
+"switch2": false
+},
+{
+"name": "SteamWorld Heist: Ultimate Edition",
+"id": "010016100A186000",
+"update": "2.2.1 (v65536)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Atelier Ryza: Ever Darkness & the Secret Hideout DX",
+"id": "0100199023B2E000",
+"update": "1.2.0 (v65536)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Pokémon Legends: Arceus",
+"id": "01001F5010DFA000",
+"update": "1.1.1 (v262144)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Raging Loop",
+"id": "010020400E1C2000",
+"update": "None (v0)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "ANIMAL WELL",
+"id": "010020D01AD24000",
+"update": "1.0.10 (v655360)",
+"status": "Playable on an iPhone (upstream)",
+"note": "",
+"switch2": false
+},
+{
+"name": "Well Dweller",
+"id": "0100217023F6C000",
+"update": "None (v0)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Super Mario 3D World + Bowser's Fury",
+"id": "010028600EBDA000",
+"update": "1.2.2 (v262144)",
+"status": "Playable on an iPhone (upstream)",
+"note": "",
+"switch2": false
+},
+{
+"name": "Need For Speed™ Hot Pursuit Remastered",
+"id": "010029B0118E8000",
+"update": "1.0.3 (v196608)",
+"status": "Profile present, not verified on a phone",
+"note": "60 fps with 1.0.3",
+"switch2": false
+},
+{
+"name": "Ghost Trick: Phantom Detective",
+"id": "010029B018432000",
+"update": "None (v0)",
+"status": "Playable on an iPhone (upstream)",
+"note": "",
+"switch2": false
+},
+{
+"name": "Hyrule Warriors: Age of Calamity",
+"id": "01002B00111A2000",
+"update": "1.3.0 (v327680)",
+"status": "Playable on an iPhone (upstream)",
+"note": "60 fps with 1.3.0",
+"switch2": false
+},
+{
+"name": "Celeste",
+"id": "01002B30028F6000",
+"update": "1.4.1.1 (v589824)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Baba Is You",
+"id": "01002CD00A51C000",
+"update": "1.0.12 (v786432)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "The Legend of Zelda: Skyward Sword HD",
+"id": "01002DA013484000",
+"update": "1.0.1 (v65536)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Cult of the Lamb",
+"id": "01002E7016C46000",
+"update": "1.5.28 (v1966080)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Advance Wars 1+2: Re-Boot Camp",
+"id": "0100300012F2A000",
+"update": "None (v0)",
+"status": "Playable on an iPhone (upstream)",
+"note": "",
+"switch2": false
+},
+{
+"name": "Mario + Rabbids® Sparks of Hope",
+"id": "0100317013770000",
+"update": "1.6.2225577 (v393216)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Super Monkey Ball Banana Rumble",
+"id": "010031F019294000",
+"update": "2.20 (v458752)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Return of the Obra Dinn",
+"id": "010032E00E6E2000",
+"update": "1.0.1 (v65536)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Taiko Risshiden V DX",
+"id": "0100346017304000",
+"update": "1.1.1 (v131072)",
+"status": "Playable on an iPhone by touch (upstream)",
+"note": "Japanese · played by touch",
+"switch2": false
+},
+{
+"name": "The Great Ace Attorney Chronicles",
+"id": "010036E00FB20000",
+"update": "None (v0)",
+"status": "Playable on an iPhone (upstream)",
+"note": "",
+"switch2": false
+},
+{
+"name": "Bastion",
+"id": "010038600B27E000",
+"update": "None (v0)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "FINAL FANTASY TACTICS - The Ivalice Chronicles",
+"id": "010038B015560000",
+"update": "1.4.0 (v393216)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "DRAGON QUEST III HD-2D Remake",
+"id": "01003E601E324000",
+"update": "1.1.2 (v262144)",
+"status": "Profile present, not verified on a phone",
+"note": "60 fps with 1.1.2",
+"switch2": false
+},
+{
+"name": "13 Sentinels: Aegis Rim",
+"id": "01003FC01670C000",
+"update": "1.10 (v65536)",
+"status": "Playable on an iPhone (upstream)",
+"note": "",
+"switch2": false
+},
+{
+"name": "Blasphemous 2",
+"id": "010040801A4C8000",
+"update": "1.0.8 (v524288)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Subnautica",
+"id": "0100429011144000",
+"update": "1.23.83358 (v458752)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "13 Sentinels: Aegis Rim (Japan)",
+"id": "010045C014650000",
+"update": "None (v0)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Super Mario 3D All-Stars",
+"id": "010049900F546000",
+"update": "1.1.4 (v393216)",
+"status": "Profile present, not verified on a phone",
+"note": "Super Mario 64 and Sunshine; Galaxy is 32-bit ARM, which Apple silicon cannot run",
+"switch2": false
+},
+{
+"name": "Bayonetta 3",
+"id": "01004A4010FEA000",
+"update": "1.2.0 (v131072)",
+"status": "Playable on an iPhone (upstream)",
+"note": "",
+"switch2": false
+},
+{
+"name": "DARK SOULS: REMASTERED",
+"id": "01004AB00A260000",
+"update": "1.0.3 (v196608)",
+"status": "Profile present, not verified on a phone",
+"note": "60 fps with 1.0.3",
+"switch2": false
+},
+{
+"name": "Kirby and the Forgotten Land",
+"id": "01004D300C5AE000",
+"update": "1.1.0 (v65536)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Monster Train 2",
+"id": "010051701FB46000",
+"update": "1.1.1 (v131072)",
+"status": "Playable on an iPhone (upstream)",
+"note": "60 fps with 1.1.1",
+"switch2": false
+},
+{
+"name": "OCTOPATH TRAVELER 0",
+"id": "01005270232F2000",
+"update": "1.0.5 (v327680)",
+"status": "Profile present, not verified on a phone",
+"note": "60 fps with 1.0.5",
+"switch2": false
+},
+{
+"name": "Hades",
+"id": "0100535012974000",
+"update": "1.0.38233 (v589824)",
+"status": "Playable on an iPhone (upstream)",
+"note": "",
+"switch2": false
+},
+{
+"name": "Unicorn Overlord (Asia)",
+"id": "010054B01AD92000",
+"update": "1.05 (v262144)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Fire Emblem: Three Houses",
+"id": "010055D009F78000",
+"update": "1.2.0 (v327680)",
+"status": "Playable on an iPhone (upstream)",
+"note": "60 fps with 1.2.0",
+"switch2": false
+},
+{
+"name": "NieR:Automata The End of YoRHa Edition",
+"id": "010056B015FE8000",
+"update": "1.0.3 (v131072)",
+"status": "Playable on an iPhone (upstream)",
+"note": "60 fps with 1.0.3",
+"switch2": false
+},
+{
+"name": "OCTOPATH TRAVELER",
+"id": "010057D006492000",
+"update": "1.0.5 (v327680)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Persona 5 Royal",
+"id": "01005CA01580E000",
+"update": "1.0.2 (v65536)",
+"status": "Playable on an iPhone (upstream)",
+"note": "",
+"switch2": false
+},
+{
+"name": "Yoshi's Crafted World",
+"id": "01006000040C2000",
+"update": "1.0.1 (v65536)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "FINAL FANTASY RESONANCE",
+"id": "0100606026F12000",
+"update": "1.0.1 (v65536)",
+"status": "Playable on an iPhone (upstream)",
+"note": "60 fps with 1.0.1",
+"switch2": false
+},
+{
+"name": "Big Brain Academy: Brain vs. Brain",
+"id": "0100620012D6E000",
+"update": "1.2.0 (v131072)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Persona 4 Golden",
+"id": "010062B01525C000",
+"update": "1.0.2 (v131072)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Hollow Knight",
+"id": "0100633007D48000",
+"update": "1.5.12620 (v589824)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "SUPER ROBOT WARS Y",
+"id": "010063301BD50000",
+"update": "1.4.1 (v720896)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Dead Cells",
+"id": "0100646009FBE000",
+"update": "1.25.0 (v3014656)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Mario + Rabbids Kingdom Battle",
+"id": "010067300059A000",
+"update": "1.9.589692 (v589824)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Unicorn Overlord",
+"id": "010069401ADB8000",
+"update": "1.05 (v262144)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Blasphemous",
+"id": "0100698009C6E000",
+"update": "1.0.8 (v524288)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "SHIN MEGAMI TENSEI V: Vengeance",
+"id": "010069C01AB82000",
+"update": "1.0.3 (v196608)",
+"status": "Playable on an iPhone (upstream)",
+"note": "60 fps with 1.0.3",
+"switch2": false
+},
+{
+"name": "Super Smash Bros. Ultimate",
+"id": "01006A800016E000",
+"update": "13.0.5 (v2031616)",
+"status": "Playable on an iPhone (upstream)",
+"note": "offline",
+"switch2": false
+},
+{
+"name": "The Legend of Zelda: Link's Awakening",
+"id": "01006BB00C6F0000",
+"update": "1.1.0 (v131072)",
+"status": "Playable on an iPhone (upstream)",
+"note": "",
+"switch2": false
+},
+{
+"name": "DRAGON QUEST XI S: Echoes of an Elusive Age – Definitive Edition",
+"id": "01006C300E9F0000",
+"update": "1.0.4 (v262144)",
+"status": "Profile present, not verified on a phone",
+"note": "60 fps with 1.0.4",
+"switch2": false
+},
+{
+"name": "Mario & Luigi: Brothership",
+"id": "01006D0017F7A000",
+"update": "None (v0)",
+"status": "Profile present, not verified on a phone",
+"note": "up to 120 fps",
+"switch2": false
+},
+{
+"name": "Animal Crossing: New Horizons",
+"id": "01006F8002326000",
+"update": "3.0.3 (v2228224)",
+"status": "Verified here — builds, installs and runs smoothly on an iPhone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Mario Party Superstars",
+"id": "01006FE013472000",
+"update": "1.1.1 (v131072)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "AI: THE SOMNIUM FILES - nirvanA Initiative",
+"id": "0100713016CCC000",
+"update": "1.0.2 (v131072)",
+"status": "Playable on an iPhone (upstream)",
+"note": "",
+"switch2": false
+},
+{
+"name": "ASTRAL CHAIN",
+"id": "01007300020FA000",
+"update": "1.0.1 (v65536)",
+"status": "Playable on an iPhone (upstream)",
+"note": "60 fps target with 1.0.1",
+"switch2": false
+},
+{
+"name": "Xenoblade Chronicles 3",
+"id": "010074F013262000",
+"update": "2.2.1 (v720896)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Bayonetta",
+"id": "010076F0049A2000",
+"update": "1.1 (v65536)",
+"status": "Playable on an iPhone (upstream)",
+"note": "",
+"switch2": false
+},
+{
+"name": "Bayonetta 2",
+"id": "01007960049A0000",
+"update": "1.2 (v131072)",
+"status": "Playable on an iPhone (upstream)",
+"note": "",
+"switch2": false
+},
+{
+"name": "Princess Peach: Showtime!",
+"id": "01007A3009184000",
+"update": "None (v0)",
+"status": "Profile present, not verified on a phone",
+"note": "60 fps with 1.0.0",
+"switch2": false
+},
+{
+"name": "Portal",
+"id": "01007BB017812000",
+"update": "1.0.3 (v196608)",
+"status": "Playable on an iPhone (upstream)",
+"note": "",
+"switch2": false
+},
+{
+"name": "Kirby Star Allies",
+"id": "01007E3006DDA000",
+"update": "4.0.0a (v393216)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "The Legend of Zelda: Breath of the Wild",
+"id": "01007EF00011E000",
+"update": "1.9.0 (v1114112)",
+"status": "Playable on an iPhone (upstream)",
+"note": "60 fps with 1.9.0",
+"switch2": false
+},
+{
+"name": "BALL x PIT",
+"id": "010086A022444000",
+"update": "1.293 (v393216)",
+"status": "Playable on an iPhone (upstream)",
+"note": "",
+"switch2": false
+},
+{
+"name": "AI: THE SOMNIUM FILES",
+"id": "010089B00D09C000",
+"update": "1.0.1 (v65536)",
+"status": "Playable on an iPhone (upstream)",
+"note": "",
+"switch2": false
+},
+{
+"name": "SteamWorld Heist II",
+"id": "010089C01E9CA000",
+"update": "1.5.1 (v262144)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "STEINS;GATE RE:BOOT",
+"id": "01008BC024FDE000",
+"update": "1.0.3 (v131072)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Sea of Stars",
+"id": "01008C0016544000",
+"update": "2.0.59001 (v786432)",
+"status": "Playable on an iPhone (upstream)",
+"note": "",
+"switch2": false
+},
+{
+"name": "The Legend of Zelda: Echoes of Wisdom",
+"id": "01008CF01BAAC000",
+"update": "1.1.0 (v196608)",
+"status": "Playable on an iPhone (upstream)",
+"note": "",
+"switch2": false
+},
+{
+"name": "13 Sentinels: Aegis Rim (Asia)",
+"id": "01008D7016438000",
+"update": "None (v0)",
+"status": "Playable on an iPhone (upstream)",
+"note": "",
+"switch2": false
+},
+{
+"name": "Pokémon Shield",
+"id": "01008DB008C2C000",
+"update": "1.3.2 (v458752)",
+"status": "Playable on an iPhone (upstream)",
+"note": "",
+"switch2": false
+},
+{
+"name": "Pokémon Violet",
+"id": "01008F6008C5E000",
+"update": "None (v0)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Team Sonic Racing",
+"id": "010092B0091D0000",
+"update": "1.0.3 (v131072)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "SteamWorld Dig",
+"id": "01009320084A4000",
+"update": "1.12.0 (v65536)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Metroid Dread",
+"id": "010093801237C000",
+"update": "2.1.0 (v327680)",
+"status": "Playable on an iPhone (upstream)",
+"note": "",
+"switch2": false
+},
+{
+"name": "Super Mario Party Jamboree",
+"id": "0100965017338000",
+"update": "2.3.0 (v458752)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "DAVE THE DIVER",
+"id": "010097F018538000",
+"update": "1.0.6.1267 (v3080192)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Super Mario Galaxy",
+"id": "010099C022B96000",
+"update": "1.3.1 (v327680)",
+"status": "Playable on an iPhone (upstream)",
+"note": "",
+"switch2": false
+},
+{
+"name": "Captain Toad: Treasure Tracker",
+"id": "01009BF0072D4000",
+"update": "1.4.2 (v393216)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Donkey Kong Country Returns HD",
+"id": "01009D901BC56000",
+"update": "1.1.0 (v65536)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Hades II",
+"id": "0100A00019DE0000",
+"update": "1.0.137848 (v1)",
+"status": "Verified here — builds, installs and runs on an iPhone, 33-file archive",
+"note": "",
+"switch2": false
+},
+{
+"name": "OCTOPATH TRAVELER II",
+"id": "0100A3501946E000",
+"update": "1.1.1 (v131072)",
+"status": "Playable on an iPhone (upstream)",
+"note": "60 fps with 1.1.1",
+"switch2": false
+},
+{
+"name": "Paper Mario: The Origami King",
+"id": "0100A3900C3E2000",
+"update": "1.0.1 (v65536)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Pokémon Scarlet",
+"id": "0100A3D008C5C000",
+"update": "None (v0)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Cuphead",
+"id": "0100A5C00D162000",
+"update": "1.3.7 (v655360)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Fire Emblem Engage",
+"id": "0100A6301214E000",
+"update": "2.0.0 (v327680)",
+"status": "Playable on an iPhone (upstream)",
+"note": "60 fps with 2.0.0",
+"switch2": false
+},
+{
+"name": "Absolum",
+"id": "0100A83022A22000",
+"update": "1.1.2 (v458752)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "DRAGON QUEST VII Reimagined",
+"id": "0100A9D01C446000",
+"update": "1.2.0 (v131072)",
+"status": "Profile present, not verified on a phone",
+"note": "60 fps with 1.2.0",
+"switch2": false
+},
+{
+"name": "Portal 2",
+"id": "0100ABD01785C000",
+"update": "1.0.3 (v196608)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Pokémon Sword",
+"id": "0100ABF008968000",
+"update": "1.3.2 (v458752)",
+"status": "Playable on an iPhone (upstream)",
+"note": "",
+"switch2": false
+},
+{
+"name": "Batman: Arkham Knight",
+"id": "0100ACD0163D0000",
+"update": "1.0.5 (v327680)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Hyrule Warriors: Definitive Edition",
+"id": "0100AE00096EA000",
+"update": "1.0.1 (v65536)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Monster Hunter Rise",
+"id": "0100B04011742000",
+"update": "16.0.2 (v2228224)",
+"status": "Profile present, not verified on a phone",
+"note": "60 fps with 16.0.2",
+"switch2": false
+},
+{
+"name": "Pikmin 4",
+"id": "0100B7C00933A000",
+"update": "1.1.1 (v262144)",
+"status": "Playable on an iPhone (upstream)",
+"note": "60 fps, up to 120 on the Mac",
+"switch2": false
+},
+{
+"name": "FINAL FANTASY RESONANCE (Asian release)",
+"id": "0100B8A026F14000",
+"update": "1.0.1 (v65536)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "NieR:Automata The End of YoRHa Edition",
+"id": "0100B8E016F76000",
+"update": "1.0.3 (v131072)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Mario vs. Donkey Kong",
+"id": "0100B99019412000",
+"update": "1.0.1 (v65536)",
+"status": "Playable on an iPhone (upstream)",
+"note": "",
+"switch2": false
+},
+{
+"name": "Castlevania: Belmont's Curse",
+"id": "0100BA4026E94000",
+"update": "1.1.0 (v65536)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Super Mario RPG",
+"id": "0100BC0018138000",
+"update": "1.0.1 (v65536)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "FINAL FANTASY X/X-2 HD Remaster",
+"id": "0100BC300CB48000",
+"update": "None (v0)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Catherine: Full Body",
+"id": "0100BF00112C0000",
+"update": "1.0.1a (v131072)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Donkey Kong Country: Tropical Freeze",
+"id": "0100C1F0051B6000",
+"update": "1.0.2 (v131072)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "ROMANCE OF THE THREE KINGDOMS 8 REMAKE",
+"id": "0100C2A01A730000",
+"update": "1.1.3 (v851968)",
+"status": "Playable on an iPhone with a controller (upstream)",
+"note": "controller only",
+"switch2": false
+},
+{
+"name": "EA SPORTS FC 27",
+"id": "0100C49025D3E000",
+"update": "1.8d.310c (v393216)",
+"status": "Profile present, not verified on a phone",
+"note": "60 fps with 1.8d.310c",
+"switch2": false
+},
+{
+"name": "SteamWorld Dig 2",
+"id": "0100CA9002322000",
+"update": "4.1.1 (v196608)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "TRIANGLE STRATEGY",
+"id": "0100CC80140F8000",
+"update": "1.1.1 (v262144)",
+"status": "Profile present, not verified on a phone",
+"note": "60 fps with 1.1.1",
+"switch2": false
+},
+{
+"name": "Balatro",
+"id": "0100CD801CE5E000",
+"update": "1.1.3 (v851968)",
+"status": "Playable on an iPhone (upstream)",
+"note": "played by touch",
+"switch2": false
+},
+{
+"name": "FINAL FANTASY CRYSTAL CHRONICLES Remastered Edition",
+"id": "0100CE4010AAC000",
+"update": "1.0.3 (v196608)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Silver Pines",
+"id": "0100D5B026844000",
+"update": "None (v0)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "DRAGON QUEST I & II HD-2D Remake",
+"id": "0100D7C01F254000",
+"update": "1.0.2 (v131072)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Rhythm Heaven Groove",
+"id": "0100D9F01D474000",
+"update": "None (v0)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Luigi's Mansion 3",
+"id": "0100DCA0064A6000",
+"update": "1.4.0 (v327680)",
+"status": "Playable on an iPhone (upstream)",
+"note": "60 fps with 1.4.0",
+"switch2": false
+},
+{
+"name": "Patrick's Parabox",
+"id": "0100E44016C22000",
+"update": "1.0.1 (v65536)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Stardew Valley",
+"id": "0100E65002BB8000",
+"update": "1.6.15.13 (v1310720)",
+"status": "Playable on an iPhone (upstream)",
+"note": "",
+"switch2": false
+},
+{
+"name": "Xenoblade Chronicles 2",
+"id": "0100E95004038000",
+"update": "2.1.0 (v983040)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Streets of Rage 4",
+"id": "0100EC9010258000",
+"update": "1.0.9 (v458752)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Paper Mario: The Thousand-Year Door",
+"id": "0100ECD018EBE000",
+"update": "1.0.1 (v65536)",
+"status": "Profile present, not verified on a phone",
+"note": "60 fps with 1.0.1",
+"switch2": false
+},
+{
+"name": "The Legend of Zelda: Tears of the Kingdom",
+"id": "0100F2C0115B6000",
+"update": "1.4.3 (v720896)",
+"status": "Verified here — builds, installs and runs on an iPhone, byte-verified",
+"note": "60 fps with 1.4.3",
+"switch2": false
+},
+{
+"name": "Pokémon Legends: Z-A",
+"id": "0100F43008C44000",
+"update": "2.0.2 (v393216)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Brain Memory Training Academy",
+"id": "0100F5D01DA3A000",
+"update": "None (v0)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Super Mario Galaxy 2",
+"id": "0100FD8022DAA000",
+"update": "1.4.0 (v393216)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Xenoblade Chronicles: Definitive Edition",
+"id": "0100FF500E34A000",
+"update": "1.1.2 (v196608)",
+"status": "Profile present, not verified on a phone",
+"note": "",
+"switch2": false
+},
+{
+"name": "Splatoon Raiders",
+"id": "0400380020056000",
+"update": "v65536",
+"status": "Profile present, not verified on a phone",
+"note": "Switch 2, Mac only, from a dump",
+"switch2": true,
+"upstream": "Plays on the Mac (update v65536). No IPA built: its memory layout is over iOS's limit for now",
+"fork": "Not tried"
+},
+{
+"name": "Hyrule Warriors: Age of Imprisonment",
+"id": "04003F40232DE000",
+"update": "v196608",
+"status": "Profile present, not verified on a phone",
+"note": "Switch 2, Mac only, from a NUP",
+"switch2": true,
+"upstream": "Reaches the first field on the Mac (update v196608), from a NUP. No IPA built",
+"fork": "Not tried"
+},
+{
+"name": "The Legend of Zelda: Ocarina of Time",
+"id": "0400486024DEC000",
+"update": "v131072",
+"status": "Verified here — plays on a Mac, up to inside Ganon's Castle (462,601 frames in 2 h 41 min)",
+"note": "Switch 2, Mac only, from a NUP",
+"switch2": true,
+"upstream": "Plays on the Mac through the title, the opening and Kokiri Forest (update v131072), about 59 fps. Mac only so far",
+"fork": "Built from the command line and played on a Mac up to inside Ganon's Castle: 462,601 frames in 2 h 41 min, frame time p50 16.66 ms, no crash. Host `92aa1222`, 240 commits behind `main`, so what comes after that point is not covered"
+},
+{
+"name": "Donkey Kong Bananza",
+"id": "040074A01BF12000",
+"update": "v458752",
+"status": "Verified here — builds, installs and runs on an iPhone",
+"note": "Switch 2, Mac only, from a dump",
+"switch2": true,
+"upstream": "Plays on the Mac (update v458752), tested through the first level's opening areas",
+"fork": "Built and played through the launcher on a Mac, an iPhone and an iPad, with no problems on the Mac and the iPhone and almost none on the iPad. Before that, played once on an iPhone 17 Pro Max with iOS 27.0.1, built from the command line (#445)"
+},
+{
+"name": "Fire Emblem Fortune's Weave",
+"id": "04007EF01F8AE000",
+"update": "v131072",
+"status": "Verified — plays on an iPhone 18 Pro Max at 60 fps (#1143)",
+"note": "Switch 2, Mac & iPhone (60 fps), from a dump, up to 120 fps",
+"switch2": true,
+"upstream": "Plays on the Mac (v131072), 60 fps. No IPA built",
+"fork": "Verified on an iPhone 18 Pro Max at 60 fps (v131072, single-game app with increased-memory-limit, #1143). CPU 1.51 W, 2.1 GB resident memory, 0 dropped frames"
+},
+{
+"name": "Pokémon Pokopia",
+"id": "0400A3A01EE4C000",
+"update": "v655360",
+"status": "Profile present, not verified on a phone",
+"note": "Switch 2, Mac only, from a dump",
+"switch2": true,
+"upstream": "Plays on the Mac (update v655360). No IPA built",
+"fork": "Not tried"
+},
+{
+"name": "Mario Kart World",
+"id": "0400C3F00006E000",
+"update": "None (v0)",
+"status": "Profile present, not verified on a phone",
+"note": "Switch 2, Mac only, from a dump",
+"switch2": true,
+"upstream": "Reaches a race on the Mac (v0), 60 fps. No IPA built",
+"fork": "Not tried"
+},
+{
+"name": "Mario Tennis Fever",
+"id": "0400D4201C6EA000",
+"update": "v327680",
+"status": "Profile present, not verified on a phone",
+"note": "Switch 2, Mac only, from a dump",
+"switch2": true,
+"upstream": "Plays on the Mac (update v327680), 60 fps. No IPA built",
+"fork": "Not tried"
+}
+]

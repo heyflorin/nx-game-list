@@ -1,0 +1,268 @@
+# Findings from seedds/nxnative issues (open and closed), read 2026-11-07.
+# Each report: (issue number, kind, text). kind: 'good' = runs, 'bad' = open problem, 'fixed' = problem since fixed.
+REPORTS = {
+ '01009D901BC56000': [(429,'good','1.1.0 runs at 60 fps on an iPhone 15 Pro')],
+ '0100C1F0051B6000': [(259,'good','Plays at 60 fps on a Mac with sound and correct graphics (levels 1-1, 1-2)'),
+                      (676,'bad','1.0.2 on an M3 Mac: crackling audio, flickering background in level 1-3')],
+ '01004D300C5AE000': [(156,'fixed','Early builds drew a black screen with no text'),
+                      (450,'fixed','1.1.0 crashed after the car-swallowing cutscene on Mac'),
+                      (1358,'bad','Switch 2 Edition and Star-Crossed World DLC not supported yet')],
+ '010067300059A000': [(359,'fixed','Crashed in static init on Mac before graphics started')],
+ '01006FE013472000': [(1022,'bad','Mac build fails creating the offline pipeline archive (140,036 pipelines)')],
+ '0100ECD018EBE000': [(1012,'fixed','1.0.1: Glitzville arena intro aborted'),
+                      (222,'bad','Purple boxes in cutscenes and dialogue (1.0.1 with 60 fps patch, M5 Mac)')],
+ '0100F43008C44000': [(149,'fixed','Froze 40-60 s in on an iPhone 16 Pro'),(174,'fixed','Froze on macOS after the opening'),
+                      (614,'fixed','2.0.2 on a MacBook Air M4: frame time swings 33-50 ms'),
+                      (139,'bad','Freezes entering the big map from the station on iPhone Air, iPad mini A17 Pro, iPad Pro M1')],
+ '01007A3009184000': [(996,'fixed','Unreal/Wwise heap alignment fix for support')],
+ '0100000000010000': [(56,'fixed','Crashed on an iPhone 16 (iOS 27); manual save failed'),(223,'fixed','Crash entering Wooded Kingdom'),
+                      (715,'fixed','Crash entering a Sand Kingdom pipe with rumble on'),
+                      (1395,'bad','Still crashes going down a pipe in the Sand Kingdom'),
+                      (879,'bad','v1.3.0 crashes at startup on Mac (use 1.4.1)'),(612,'bad','Flickering lights and flares')],
+ '010015100B514000': [(373,'closed','Crash with invalid Metal pixel format'),(377,'fixed','Neon green flickering blocks'),
+                      (602,'bad','1.2.1: ground and some platforms invisible in many levels')],
+ '0100965017338000': [(509,'good','2.3.0 boards render and play on an M2 Mac (with local fixes)'),
+                      (1293,'bad','Intermittent crashes and corruption on an M3 Pro, mostly in 2-controller multiplayer')],
+ '01008CF01BAAC000': [(758,'fixed','Offline pipeline archive was rejected (missing depth mode)')],
+ '0100152000022000': [(281,'fixed','Mac menus hung after pressing A'),(550,'fixed','Entering 2P hung'),
+                      (603,'bad','Late frames in fullscreen on ProMotion displays'),(1316,'bad','4.0.1 Mac: Grand Prix credits movie never ends')],
+ '010028600EBDA000': [],
+ '01007EF00011E000': [(142,'good','Performance thread: 60 to 120 fps and 4K on iPhone and Mac'),
+                      (4,'closed','Crashed on iOS devices without BC textures (A16)'),(52,'fixed','Gray/dark sky'),
+                      (636,'fixed','1.9.0 videos played at double speed'),(598,'fixed','About 20 fps in shrines on a MacBook Air M3'),
+                      (713,'bad','Crash (SIGSEGV) shortly after start for some players'),
+                      (1523,'bad','Freezes up to 1.6 s and audio stutter on an M3 Pro')],
+ '0100F2C0115B6000': [(61,'fixed','Crash after 8-30 min of play'),(147,'fixed','8 GB iPad M2: killed for memory after 45-70 min'),
+                      (183,'fixed','Terrain rendering broken in the Depths'),
+                      (639,'bad','Memory-shortage Blood Moon returns in long sessions; missing grass'),
+                      (638,'bad','Fire Temple approach: lava floor not drawn'),(807,'bad','Stalls entering Sifumim Shrine'),
+                      (832,'bad','Mac: GPU memory grows about 1 GB/min in the Depths'),
+                      (737,'bad','About 15 fps in a shrine on iPad M5'),(432,'bad','Kernel panic reported on an M4 Pro Mac'),
+                      (724,'bad','iOS: cheats do not work')],
+ '040074A01BF12000': [(924,'good','Plays on an iPad Pro M4 (8 GB)'),(1183,'good','Plays on an iPhone 18 Pro: 60 fps until the phone heats up, then 45-60'),
+                      (1028,'fixed','Blocky 3D scene on an M5 Mac'),(1146,'fixed','Square artifacts on an M1 8 GB Mac'),
+                      (932,'fixed','Dropped to about 15 fps on an iPhone 17'),
+                      (1622,'bad','Frame rate collapses to about 30 fps facing complex geometry'),(1243,'bad','Low performance reports'),
+                      (1222,'bad','Controller rumble gets stuck on')],
+ '0400C3F00006E000': [(1186,'good','1.8.0 plays well on an M4 Pro Mac (one sky artifact)'),
+                      (1184,'bad','iPhone 18 Pro: runs at 60 fps then iOS kills it for memory after about 30 s'),
+                      (1237,'bad','1.8.0: iOS kills it for memory when the first race loads'),
+                      (1193,'bad','GPU out-of-memory crash on a 16 GB Mac'),(1536,'bad','8 GB Macs: no low-memory settings'),
+                      (1449,'bad','Survival mode memory leak drops to about 20 fps')],
+ '0400380020056000': [(1289,'bad','GPU fault about 4 minutes in, then the picture freezes'),
+                      (1281,'bad','Outgrows a 16 GB Mac (swaps at 14 GB)')],
+ '0400486024DEC000': [(1326,'bad','Mac: GPU hang about 10 minutes in can take WindowServer down'),
+                      (1621,'bad','Dotted stripe artifacts across the picture on many Macs'),
+                      (1641,'bad','Hyrule Castle renders pink'),(1433,'bad','Playing the ocarina can abort the game'),
+                      (1361,'bad','Out-of-memory at startup on some setups'),(1605,'bad','M1 16 GB: GPU hang under memory pressure, about 24 fps')],
+ '0400D4201C6EA000': [(1246,'bad','Adventure mode: 30-45 fps and black outdoor textures')],
+ '0400A3A01EE4C000': [(1036,'fixed','Mac build can use a smaller ~8k shader library instead of 131k'),
+                      (1174,'bad','Build cache grew past 200 GB and crashed on a full disk')],
+ '04003F40232DE000': [(1223,'bad','WindowServer freezes and GPU timeouts on Apple silicon')],
+ '01001F5010DFA000': [(523,'good','1.0.2 plays on an iPhone 16'),(535,'good','1.1.1 boots and plays on Mac with two overrides'),
+                      (712,'bad','Mac: crash after 40-65 min, 3 of 3 sessions')],
+ '01005CA01580E000': [(442,'good','1.0.2 plays at 30 fps on an iPhone Duo (iOS 27.1)')],
+ '0100BA4026E94000': [(641,'good','1.1.0 boots and plays on Mac at 60 fps')],
+ '0100A3D008C5C000': [(1448,'good','4.0.0 plays through the first capture on Mac with an intact update dump'),
+                      (1250,'fixed','Picture froze while audio kept playing')],
+ '01008F6008C5E000': [(207,'good','4.0.0 boots and plays on Mac with three fixes'),(271,'bad','Text rendering can freeze the game')],
+ '01002DA013484000': [(928,'good','1.0.0 draws and plays with two fixes; yellow fog in cutscenes')],
+ '0100300012F2A000': [(114,'good','1.0.0 battles playable on an M1 Pro Mac')],
+ '0100B7C00933A000': [(113,'good','1.1.1 startup and tutorial validated on an M1 Pro Mac')],
+ '01006A800016E000': [(504,'good','13.0.5 plays at 60 fps on iPhone, with multi-controller support'),
+                      (503,'bad','iPhone: crashes entering the main menu if packed without DLC licences'),
+                      (768,'bad','13.0.5 Mac: audio crackle, then a crash after the opening')],
+ '01002B00111A2000': [(536,'good','60 fps on a 1.4.1 build (needs that build registered)'),(245,'bad','1.3.0 Mac app shows only a black screen')],
+ '010097F018538000': [(1117,'good','Boots and plays; some visual bugs in minigames and the restaurant')],
+ '01006C300E9F0000': [(626,'fixed','1.0.4 on iPad mini 7: froze at startup until frame buffering was disabled')],
+ '0100A6301214E000': [(658,'bad','2.0.0 iPhone 15 Pro Max: crash travelling to The Somniel'),(1457,'bad','That crash still happens on iPhone and iPad')],
+ '0100A3501946E000': [(925,'bad','iPhone 16 Pro: killed for memory when boarding the ship'),(1226,'bad','iOS: a chapter 1 boss result hits the 6 GiB limit')],
+ '0100E95004038000': [(702,'bad','2.1.0 crashes in the opening on iPad'),(764,'bad','Foliage pitch black in Chapter 2'),
+                      (999,'bad','iPad Air M3: Control Center during movement crashes')],
+ '0100DCA0064A6000': [(257,'fixed','Big fps drops and 11 GB memory in new areas'),(100,'fixed','Docked 60 fps opening over the iOS memory limit'),
+                      (672,'bad','Crash browsing the Ghost Gallery')],
+ '01006F8002326000': [(69,'fixed','Wrong colours'),(73,'bad','Map screen draws wrong')],
+ '0100FD8022DAA000': [(68,'fixed','Crashed after the first level'),(72,'fixed','Mario half white'),(1313,'bad','Mario too white on iPhone Duo (1.4.0)')],
+ '010055D009F78000': [(35,'fixed','Shader split failed'),(95,'fixed','No audio on Mac')],
+ '01004AB00A260000': [(308,'bad','Graphical artifacts')],
+ '0100633007D48000': [(1421,'bad','iPhone 17 runs hot after a few minutes, even at 0.5 render scale')],
+ '01006D0017F7A000': [(837,'bad','Build stops at Unreal shader decode; a community patch exists (#1061)')],
+ '0100317013770000': [(483,'fixed','Crash during gameplay and save loading'),(1010,'bad','Crash reports')],
+ '010014E00DB56000': [(769,'fixed','Save slots always showed NO DATA')],
+ '010012101468C000': [(783,'fixed','Missing textures')],
+ '010069C01AB82000': [(1034,'bad','Softlock after the first attack in the prologue battle')],
+ '0100A00019DE0000': [(30,'closed','Abort when choosing a new keepsake'),(1429,'bad','Crash after equipping keepsakes and loading saves')],
+ '010092B0091D0000': [(540,'fixed','Build failed: shader split found no shaders')],
+ '0100BC300CB48000': [(704,'closed','Crash entering gameplay (invalid pixel format)')],
+ '01006BB00C6F0000': [(608,'fixed','Touch and controller input did not work')],
+ '0100FF500E34A000': [(796,'bad','Intermittent crash after a cutscene, then crash at startup')],
+ '0100EC9010258000': [(1324,'bad','Magenta flash at startup')],
+ '0100B04011742000': [(1266,'fixed','Crash opening shop NPCs')],
+ '0100606026F12000': [(850,'closed','iOS crash on the first random encounter'),(1424,'bad','Mac crash in Chapter 4 Factory'),(353,'bad','Black background screen')],
+ '010042000A986000': [(964,'bad','1.7.3 crashes at startup on a Mac mini M4'),(881,'bad','Exits right after Play on iPad Pro M4')],
+}
+# Promote "Profile only" games with a first-hand "it plays" report.
+REPORTED_WORKING = {'01009D901BC56000','0100C1F0051B6000','01001F5010DFA000','01005CA01580E000','0100BA4026E94000',
+  '0100A3D008C5C000','01008F6008C5E000','0100300012F2A000','01006A800016E000','01002B00111A2000','010097F018538000',
+  '0100965017338000','01002DA013484000'}
+# Switch 2 games whose status moves up from issue reports.
+TIER_OVERRIDE = {'0400C3F00006E000': 'Plays on Mac'}
+# Issue-only games: in no GAMES.md table. (id, name, console2, tier, tested platforms, issue, note)
+EXTRA_GAMES = [
+ ('0100D680194B2000','Pikmin 2',False,'Partial',['Mac'],914,'Runs on Mac but crashes now and then'),
+ ('01007B5017A12000','Sifu',False,'Reported working',['Mac'],219,'Runs well on an M3 Mac with the automatic profile'),
+ ('010029D00E740000','DOOM 3',False,'Reported working',['Mac','iPhone'],1180,'Plays on Mac and an iPhone 13 Pro with a patch'),
+ ('01003BD00CAAE000','Wolfenstein: Youngblood',False,'Reported working',['Mac'],1314,'Playable on Mac with a profile and engine patch'),
+ ('0100ACF013E9A000','Skul: The Hero Slayer',False,'Reported working',['Mac','iPhone'],1451,'Plays on Mac and an iPhone Duo, no changes needed'),
+ ('0100F0701F9B0000','Lost in Random: The Eternal Die',False,'Reported working',['Mac','iPhone'],940,'Plays on Mac and an iPhone 16, no changes needed'),
+ ('01004E101D476000','Arcade Archives RAINBOW ISLANDS',False,'Reported working',['Mac'],722,'Boots and plays on Mac'),
+ ('010090C022978000','Kingdom Hearts HD 1.5+2.5 ReMIX (KH II Final Mix)',False,'Reported working',['iPhone'],1026,'KH II Final Mix plays on iPhone with patches'),
+ ('01009F20086A0000','Ikaruga',False,'Reported working',['iPhone'],592,'First stage plays on an iPhone 16 Pro Max with fixes'),
+ ('01009B90006DC000','Super Mario Maker 2',False,'Partial',['Mac'],865,'Title, Create editor and story reached on Mac with fixes'),
+ ('010051F0207B2000','Tomodachi Life: Living the Dream',False,'Partial',['Mac','iPad'],560,'Boots on Mac and iPad, but Miis are invisible'),
+ ('0100ED400EEC2000','STORY OF SEASONS: Friends of Mineral Town',False,'Partial',['Mac','iPad'],420,'Playable, but the 3D world is heavily blurred'),
+ ('0100C9C00E25C000','Mario Golf: Super Rush',False,'Partial',['Mac'],814,'Menus work; courses render mostly black'),
+ ('0100BDE00862A000','Mario Tennis Aces',False,'Partial',['Mac'],1131,'Community patch gets it past the start'),
+ ('01003FB00C5A8000','Super Kirby Clash',False,'Partial',['Mac'],987,'Community patch fixes the startup crash and rendering'),
+ ('01007330027EE000','Ultra Street Fighter II: The Final Challengers',False,'Partial',['Mac'],960,'Community patch for build and runtime crashes'),
+ ('0100DBF01000A000','Burnout Paradise Remastered',False,'Partial',['Mac'],1219,'Boots; 3D world and cars invisible'),
+ ('0100D2F00D5C0000','Nintendo Switch Sports',False,'Partial',['Mac'],1287,'Aborts at the splash screen'),
+ ('040004F027560000','Orbitals',True,'Reported working',['Mac'],1264,'Switch 2 co-op game plays on Mac on a contributor branch'),
+]
+# Issues matched by game but written in a way the automatic match misses (e.g. Chinese titles).
+EXTRA_LINKS = {'01006F8002326000':[47,69,73],'0100FD8022DAA000':[68,72,508],'01007EF00011E000':[3,9],
+  '01001F5010DFA000':[162],'0100F43008C44000':[139,292],'0100ECD018EBE000':[222],'01006A800016E000':[503,504,505],
+  '0100BC300CB48000':[704],'0100DCA0064A6000':[100],'0100300012F2A000':[114],'010055D009F78000':[95],'01004AB00A260000':[187]}
+# Wrong automatic matches (a word in the title, not the game).
+EXCLUDE = {'0100000000010000':[1210,1148],'010028600EBDA000':[1219],'010015100B514000':[498,1061,673,1296],'0100CD801CE5E000':[824]}
+
+# ---- LNPANDY/NX2Apple issues (open and closed), read 2026-11-07. Numbers as 'a<N>'. ----
+APP_REPORTS = {
+ '0100A00019DE0000': [('a4','fixed','iPhone: loading any save froze the picture')],
+ '010015100B514000': [('a22','closed','NX2Apple 0.4.5: Mac build failed at the shader step (iOS built fine)')],
+ '0100DCA0064A6000': [('a23','fixed','1.4.0: GPU memory grew until iOS closed it after about 4.5 min')],
+ '0100606026F12000': [('a25','fixed','iPad Pro M1: crash after the options screen')],
+ '01008F6008C5E000': [('a126','fixed','Build failed at extraction with a hash check error')],
+ '0100A9D01C446000': [('a181','closed','Does not run on an iPhone 17 Pro Max')],
+ '0100E95004038000': [('a204','fixed','Mac: dark box in the lighting and stretched geometry')],
+ '0100F2C0115B6000': [('a303','fixed','1.4.2 ran at double speed (use 1.4.3)'),
+                      ('a327','bad','iPad Pro M4: killed for memory in docked mode'),
+                      ('a509','bad','M3 Pro Mac: about 12 fps inside a shrine')],
+ '01007EF00011E000': [('a413','fixed','iPhone build filled the disk (over 600 GB)'),
+                      ('a572','bad','A Mac build stops at the settings window for one player')],
+ '0100152000022000': [('a344','bad','iPad mini 6 (A15): killed for memory while loading a course; an opt-in texture setting helps')],
+ '01007A3009184000': [('a348','good','1.0.0 builds and starts on an M3 Max Mac')],
+ '01005CA01580E000': [('a397','fixed','Mac: about 20 fps while shaders compile'),
+                      ('a665','bad','iPhone 17 Pro: runs at 30 fps, then iOS closes it after 60-100 s'),
+                      ('a666','bad','iPhone 17 Pro: aborts after about 5.5 min')],
+ '010074F013262000': [('a455','fixed','2.2.1: glowing surfaces flickered every frame')],
+ '0100B04011742000': [('a549','fixed','Mac build crashed making the pipeline archive on an M1 Pro')],
+ '0100C1F0051B6000': [('a636','bad','iPad Pro M5: plays, but the audio clicks')],
+ '010097F018538000': [('a710','good','Plays on an iPad Pro M4'),('a763','good','Fully playable start to finish on Mac with the newest engine')],
+ '0100A5C00D162000': [('a738','bad','Build fails in the code rewrite (jump table)'),('a656','bad','A16 iPhone: green screen and touch does not work')],
+ '0400380020056000': [('a784','good','Mac: works almost perfectly, but the app gets no icon'),
+                      ('a840','bad','iPad Pro M4: drops to 5 fps in Chowder Buried Ruins sublevel 3')],
+ '0100D9F01D474000': [('a817','bad','1.2.1 Mac: crashes in level 5-3')],
+ '0400245021D2C000': [('a855','bad','Mac build fails: shader split and an Oodle decoder abort')],
+ '0400486024DEC000': [('a856','bad','M2 Pro: heavy artifacts, audio out of sync, GPU lockup'),('a836','bad','M4 Pro: black screen with sound')],
+ '040074A01BF12000': [('a869','fixed','iPhone 15 Pro Max: closed 2-3 s after launch')],
+ '010055D009F78000': [('a788','fixed','iOS build failed at the shader step in NX2Apple 1.1.0')],
+ '010013C00E930000': [('a795','closed','Build failed at the framework step')],
+ '010093801237C000': [('a640','bad','iPhone Air: crashes at boot when built with the bundled pipeline archive')],
+ '0100B8A026F14000': [('a645','bad','A15 iPhone: wrong colours and streaks across the scene')],
+ '0100ABF008968000': [('a535','fixed','Build with the update failed at the last step')],
+}
+for k, v in APP_REPORTS.items():
+    REPORTS.setdefault(k, []).extend(v)
+REPORTED_WORKING |= {'01007A3009184000'}
+# Issue-only games from NX2Apple, plus build/boot failures from both repos.
+EXTRA_GAMES += [
+ ('01002FC00412C000','Little Nightmares Complete Edition',False,'Reported working',['Mac'],'a328','Runs on Mac from the automatic profile after two engine fixes'),
+ ('01006FD0080B2000','Overcooked! 2',False,'Reported working',['iPad'],'a736','Builds and plays on an iPad Pro M4 at 30 fps'),
+ ('0100E8000D5B8000','Devil May Cry',False,'Reported working',['Mac'],'a860','Runs on Mac with two engine fixes from the reporter'),
+ ('0100D39012C1A000','Disney Dreamlight Valley',False,'Partial',['iPad'],'a247','iPad Pro M1: crashes about 2 minutes in, at the first loading screen'),
+ ('0100670014482000',"Assassin's Creed: The Ezio Collection",False,'Partial',['Mac'],'a483','Mac: shader, program switching, AC II crash and flicker problems'),
+ ('0100853015E86000',"No Man's Sky",False,'Partial',['Mac'],'a838','Menu renders after 7 local fixes; hangs after choosing a game mode'),
+ ('0100AC20128AC000','CHRONO CROSS: THE RADICAL DREAMERS EDITION',False,'Partial',['iPhone'],'a887','iPhone: Start exits when the game program is missing from the app'),
+ ('01006DC020DB8000','PATAPON 1+2 REPLAY',False,"Doesn't run yet",[],'a426','Aborts at boot (a network service the host lacks)'),
+ ('0100F7E00C70E000','Hogwarts Legacy',False,"Doesn't run yet",[],'a475','Mac: crashes after the splash screen'),
+ ('01007820196A6000','Red Dead Redemption',False,"Doesn't run yet",[],'a326','Build fails: no shaders found'),
+ ('0100726014352000','Diablo II: Resurrected',False,"Doesn't run yet",[],'a430','Build fails: no shaders found'),
+ ('0100D440269E8000','SnowRunner',False,"Doesn't run yet",[],'a644','Build fails: no shaders found (also nxnative #776)'),
+ ('010035F022078000','DRAGON BALL: Sparking! ZERO',False,"Doesn't run yet",[],714,'Build fails: the game data index is encrypted (also NX2Apple #533)'),
+ ('010071F0143EA000','Fire Emblem Warriors: Three Hopes',False,"Doesn't run yet",[],'a643','Mac build fails in the code rewrite'),
+ ('0100C87006310000','Samurai Warriors: Spirit of Sanada',False,"Doesn't run yet",[],'a747','Mac: aborts at audio start'),
+ ('0100F9F00C696000','Crash Team Racing Nitro-Fueled',False,"Doesn't run yet",[],'a585','Mac build fails at the shader capture step'),
+ ('01008F2005154000','South Park: The Fractured But Whole',False,"Doesn't run yet",[],'a377','Build stops twice; a profile is planned'),
+ ('0100CC00102B4000',"Tony Hawk's Pro Skater 1 + 2",False,"Doesn't run yet",[],496,'Black screen (Unreal pak version 8)'),
+ ('0100453019AA8000','Xenoblade Chronicles X: Definitive Edition',False,"Doesn't run yet",[],586,'Crashes at boot'),
+ ('01006C100EC08000','Minecraft Dungeons',False,"Doesn't run yet",[],1071,'Build fails (Unreal pak version 8)'),
+]
+EXTRA_LINKS.setdefault('0100D440269E8000', []).append(776)
+EXTRA_LINKS.setdefault('010035F022078000', []).append('a533')
+EXCLUDE.setdefault('0100535012974000', []).append('a4')
+
+# ---- 2026-11-15 re-check of both repos ----
+NEW_REPORTS = {
+ '01006F8002326000': [(2567,'fixed',"Handheld: the game's own keyboard entered no letters"),(2568,'bad','Work in progress on wider and taller screen shapes')],
+ '040074A01BF12000': [(1771,'good','iPad mini (A20 Pro): 45-60 fps, no overheating'),(2699,'bad','Random black frames in the Freezer Layer'),
+                      (2066,'bad','M4 Mac: a recent engine safety check halves the frame rate (55 to 30 fps)'),('a1186','bad','Windows builder: iOS shader step stuck at 99%')],
+ '01004D300C5AE000': [('a1209','fixed','iPhone: scene rendered black'),(2001,'bad','Switch 2 Edition and Star-Crossed World not supported (builds as the Switch 1 game)')],
+ '0100152000022000': [(2541,'fixed','Crashed opening the "info" screen'),(2281,'bad','5-8 player split-screen (a Switch 2 feature of 4.0.1) is locked')],
+ '0100ECD018EBE000': [(1860,'fixed','GPU hang in Peach\'s invisibility-potion sequence (Mac and iPad)')],
+ '0100B7C00933A000': [(2471,'bad','Narration after the prologue boss stays black at 60/120 fps (press A to continue)')],
+ '0100F43008C44000': [(2696,'bad','Recent engine builds: aborts after about 77 s (NVN command memory); older build was fine')],
+ '010015100B514000': [(1681,'bad','Mac (M1): see-through elements render blue')],
+ '01007EF00011E000': [(2671,'bad','Crashes every time at the Zora king cutscene (Mac and iOS)'),(2592,'bad','"The GPU stopped running" after 3-10 min on the Great Plateau'),
+                      (2321,'bad','M4 Mac: repeated GPU hangs outdoors'),(2444,'bad','iPhone 16 Pro Max: newest builds abort loading a save; a late-October build works'),
+                      ('a1242','bad','Shader glitches on every menu for one player'),(2245,'bad','Pro Controller 2 motion aiming does nothing')],
+ '0100F2C0115B6000': [(1771,'good','iPad mini (A20 Pro): 90 min, mostly 60 fps'),(2155,'bad','Crash using Ultrahand or Recall'),
+                      (1814,'bad','Aborts every time entering the Starview Island sky shrine (Mac)'),(2700,'bad','M3 Pro: GPU fault after about an hour'),
+                      (2443,'bad','M4 Max: GPU crash crossing water with Zonai devices'),('a1070','bad','Texture flicker in Lookout Landing and Goron City'),
+                      ('a1139','bad','Yellow mosaic when using Recall; 7-16 fps inside a temple'),(1688,'fixed','iPhone IPA too large for AltServer (2 GB shader file)')],
+ '01008CF01BAAC000': [(1684,'bad','iPhone 17: the build ships without its pipeline archive, so first uses stutter')],
+ '0100000000010000': [('a1024','bad','iPhone/iPad: the base game without update 1.4.1 closes before the first frame')],
+ '01007B5017A12000': [(2401,'good','1.11 plays on an iPad Pro at 30 and 60 fps')],
+ '01005270232F2000': [(2138,'good','Korean/Chinese 1.0.4 release plays on an M1 iPad Pro')],
+ '0400A3A01EE4C000': [('a1174','good','v327680 runs on an iPad Pro (M2), IPA built on Windows')],
+ '01006DC020DB8000': [('a426','fixed','Issue closed as completed; no play report yet')],
+ '0100F7E00C70E000': [('a475','fixed','Issue closed as completed; no play report yet')],
+}
+for k, v in NEW_REPORTS.items():
+    REPORTS.setdefault(k, []).extend(v)
+# Upstream profiles now cover these issue-only rows; drop the rows (the profile rows replace them).
+DROP_EXTRA = {'0100726014352000','010035F022078000','0100C9C00E25C000','01007820196A6000','040004F027560000'}
+EXTRA_GAMES[:] = [g for g in EXTRA_GAMES if g[0] not in DROP_EXTRA]
+EXTRA_GAMES += [
+ ('0100748009A28000','Manual Samuel',False,'Reported working',['iPhone'],2562,'Plays at a locked 60 fps on an iPhone 15 Pro Max'),
+ ('01009CD0167E2000','The Binding of Isaac: Repentance',False,'Reported working',['iPhone'],2144,'Plays at 60 fps on an iPhone 15 Pro Max'),
+ ('01004890117B2000','A Short Hike',False,'Reported working',['iPhone'],2142,'Plays at a locked 60 fps on an iPhone 15 Pro Max'),
+ ('01006C5015E84000','Disco Elysium - The Final Cut',False,'Reported working',['iPhone'],1959,'Boots and plays at 30 fps on an iPhone 15 Pro Max'),
+ ('0100779004172000','Golf Story',False,'Reported working',['iPhone'],1958,'Plays at 60 fps on an iPhone 15 Pro Max'),
+ ('010031B00A4E8000','West of Loathing',False,'Reported working',['iPhone'],1957,'Plays at 60 fps on an iPhone 15 Pro Max'),
+]
+for i, g in enumerate(EXTRA_GAMES):
+    if g[0] == '01007B5017A12000': EXTRA_GAMES[i] = g[:4] + (['Mac', 'iPad'],) + g[5:]
+
+REPORTS.setdefault('0100000000010000', []).append(('a1337','bad','Mac: building the pipeline archive keeps stopping at batch 6 while compiler memory grows'))
+
+# Shown beside a game in someone's folder that has no profile, keyed by its name (compared case-insensitively).
+MISSING_NOTES = {
+ 'sonic frontiers': 'only the Switch 2 Definitive Edition has a profile, and it plays on a Mac',
+}
+
+# Folder or file names that name matching gets wrong, mapped to a title ID. The page matches by title ID first,
+# then by name; these are checked before the name match. Keys are compared after the page's name normalization.
+ALIASES = {
+ 'legend of zelda the breath of the wild': '01007EF00011E000',
+ 'zelda breath of the wild': '01007EF00011E000',
+ 'botw': '01007EF00011E000',
+ 'tears of the kingdom': '0100F2C0115B6000',
+ 'zelda tears of the kingdom': '0100F2C0115B6000',
+ 'totk': '0100F2C0115B6000',
+ 'echoes of wisdom': '01008CF01BAAC000',
+ 'donkey kong country returns': '01009D901BC56000',
+ 'mk8d': '0100152000022000',
+ 'pikmin 2': '0100D680194B2000',
+}
+REPORTS.setdefault('01004D300C5AE000', []).append((2760, 'good', 'Renders correctly on an iPhone with the Metal 4 pipelines setting (DM_PSO_MTL4=1)'))
