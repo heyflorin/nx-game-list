@@ -390,14 +390,14 @@ const FILTERS = [
   { k: "tier", label: "How well it runs", opts: Object.keys(RANK).map(t => [t, t]), test: (g, v) => g.tier === v },
   { k: "plat", label: "Runs on", opts: [["Mac", "Mac"], ["iPhone", "iPhone"], ["iPad", "iPad"]], test: (g, v) => g.platforms.includes(v) },
   { k: "cons", label: "Console", opts: [["1", "Switch"], ["2", "Switch 2"]], test: (g, v) => String(g.cons) === v },
-  { k: "probs", label: "Known issues", opts: [["open", "Open issues"], ["none", "No open issues"]], test: (g, v) => v === "open" ? g.openBad : !g.openBad },
+  { k: "probs", label: "Known issues", opts: [["open", "Open issues"], ["none", "No open issues reported"]], test: (g, v) => v === "open" ? g.openBad : !g.openBad },
   { k: "src", label: "Profile source", opts: [["list", "In NX2Apple's list"], ["new", "New nxnative profile"], ["none", "No profile (issue reports only)"]], test: (g, v) => g.srcKind === v },
   { k: "upd", label: "Update needed", opts: [["base", "Base game is enough"], ["need", "Needs a specific update"], ["unknown", "Unknown (no profile)"]], test: (g, v) => g.updKind === v },
   { k: "mine", lib: true, label: "Your game update", opts: [["match", "You have the recommended update"], ["old", "Needs the recommended update"], ["new", "Newer than recommended"], ["unknown", "Can't tell (no version in your file names)"]], test: (g, v) => !!g.mine && g.mine.state === v },
 ];
 const INFO = {
   tier: "Seven levels because the evidence comes from different places, and some is stronger than the rest. They are ordered from strongest to weakest: an iPhone test by NX2Apple's maintainers, then what nxnative's own notes say, then what people report in issues. Each game sits at one level, the one its strongest evidence supports. Use the i beside each level to see what it means.",
-  probs: "Open issues are problems reported for this game on GitHub that are still open (crashes, graphics bugs, slowdowns). A game whose issues are all fixed or closed counts as having no open issues.",
+  probs: "Open issues are problems reported for this game on GitHub that are still open (crashes, graphics bugs, slowdowns). A game whose issues are all fixed or closed, or that nobody has reported issues for, shows as No open issues reported. That doesn't mean it has no problems: some may just not have been reported yet.",
   src: "Where the game's entry comes from. Most games have an nxnative profile that NX2Apple also lists. New profiles are in nxnative but not yet in NX2Apple's list. Games with no profile are known only from issue reports, so they cannot be built the normal way yet.",
   upd: "The game update (from Nintendo) that the nxnative profile is built for. Base game is enough means no update is needed. Unknown means the game has no profile yet.",
   mine: "Compares the game update in your files with the one the profile is built for. The build checks for that exact update, so an older or newer one usually won't build. Can't tell means your file names include no version, like [v393216] or Update 1.1.0.",
@@ -480,7 +480,7 @@ function render() {
     const LBL = { good: "works", bad: "open", fixed: "fixed", closed: "closed" };
     const reps = g.reports.length ? `<ul class="reports">${g.reports.map(r => `<li><span class="k k-${r.k}">${LBL[r.k]}</span><span>${esc(r.t)} ${ref(r.r, r.n)}</span></li>`).join("")}</ul>` : "";
     const nc = g.issues.length - g.nopen;
-    const issBtn = g.issues.length ? `<button type="button" class="iss-btn" data-id="${g.id}" aria-expanded="${expanded.has(g.id)}">${g.nopen ? `<b>${g.nopen} open</b> · ` : ""}${nc} closed</button>` : `<span class="iss-none">None</span>`;
+    const issBtn = g.issues.length ? `<button type="button" class="iss-btn" data-id="${g.id}" aria-expanded="${expanded.has(g.id)}">${g.nopen ? `<b>${g.nopen} open</b> · ` : ""}${nc} closed</button>` : `<span class="iss-none" title="No GitHub issue mentions this game yet. That doesn't mean it has no problems.">None reported</span>`;
     const detail = expanded.has(g.id) ? `<tr class="detail"><td colspan="8"><ul class="issue-list">${g.issues.map(i => `<li><span class="st st-${i.open ? "open" : "closed"}">${i.open ? "Open" : "Closed"}</span><span>${esc(i.t)} ${ref(i.r, i.n)}</span></li>`).join("")}</ul></td></tr>` : "";
     return `<tr class="${g.owned ? "mine" : ""}">
       <td><span class="name"><a href="${link}" target="_blank" rel="noopener">${esc(g.name)}</a></span><span class="tid-wrap"><span class="tid" tabindex="0" aria-describedby="src-${g.id}">${g.id}</span><span class="tid-pop" role="tooltip" id="src-${g.id}"><span class="tid-pop-in"><span class="tp-row">Profile source: ${chip("src", g.srcKind, "src-chip", SRC_LABEL[g.srcKind])}</span>${LIB ? `<span class="tp-row">In your folder: ${g.owned ? chip("own", "yes", "own-chip", "Found") : chip("own", "no", "own-chip no", "Not found")}</span>${g.owned ? ownDetail(g) : ""}` : ""}</span></span></span></td>
