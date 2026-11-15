@@ -99,6 +99,12 @@ for i, v in IDX.items():
     keys = {k for k, x in byn.items() if i.lower() in x['title'].lower()}
     ng['issues'] = [ent(k) for k in sorted(keys, key=lambda k: (k[0] != 'nx', k[1]))]
     games.append(ng)
+# Games known only from issues have no profile date: show when their newest issue was opened instead.
+for g in games:
+    if not g.get('profileDate') and g['issues']:
+        dates = [byn[(i['r'], i['n'])].get('created_at') for i in g['issues'] if (i['r'], i['n']) in byn]
+        dates = [d for d in dates if d]
+        if dates: g['issueDate'] = max(dates)
 # A problem whose issue has since closed becomes fixed (completed) or closed (not planned).
 for g in games:
     for r in g['reports']:

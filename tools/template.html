@@ -332,7 +332,7 @@ footer a { color: inherit; }
     <div><button type="button" class="pill t-Profile-only chip-f" data-fk="tier" data-fv="Profile only" aria-pressed="false">Profile only</button> A profile ships, so it builds, but nobody has confirmed it on a phone.</div>
     <div><button type="button" class="pill t-Doesn-t-run-yet chip-f" data-fk="tier" data-fv="Doesn't run yet" aria-pressed="false">Doesn't run yet</button> No profile; an issue reports the build or the boot failing.</div>
   </div>
-  <footer><span id="src-line"></span> "Runs on" follows NX2Apple's README: Switch games build for Mac and for iPhone/iPad; Switch 2 games run on the Mac only, except Donkey Kong Bananza (also iPhone and iPad) and Fire Emblem Fortune's Weave (also iPhone). A finding marked fixed comes from an issue closed as completed. Hover a title ID to see where its profile comes from. Recommended game update is the game's own update (from Nintendo) that the nxnative profile is built for; Profile updated is the date of the last commit to that profile in nxnative. The sources are checked automatically once a day, and the list is updated when something changed.</footer>
+  <footer><span id="src-line"></span> "Runs on" follows NX2Apple's README: Switch games build for Mac and for iPhone/iPad; Switch 2 games run on the Mac only, except Donkey Kong Bananza (also iPhone and iPad) and Fire Emblem Fortune's Weave (also iPhone). A finding marked fixed comes from an issue closed as completed. Hover a title ID to see where its profile comes from. Recommended game update is the game's own update (from Nintendo) that the nxnative profile is built for; Profile updated is the date of the last commit to that profile in nxnative; for a game with no profile it is the date its newest issue was opened. The sources are checked automatically once a day, and the list is updated when something changed.</footer>
 </div>
 
 
@@ -440,7 +440,7 @@ function cmp(a, b) {
   let x = a[k], y = b[k];
   if (k === "owned") { x = a.owned ? 0 : 1; y = b.owned ? 0 : 1; }
   if (k === "nopen") { x = -a.nopen; y = -b.nopen; }
-  if (k === "pdate") { x = a.profileDate || "0"; y = b.profileDate || "0"; }
+  if (k === "pdate") { x = a.profileDate || a.issueDate || "0"; y = b.profileDate || b.issueDate || "0"; }
   if (k === "plat") { x = -a.plat; y = -b.plat; }
   const r = typeof x === "number" ? x - y : String(x).localeCompare(String(y), undefined, { sensitivity: "base" });
   return (r || a.name.localeCompare(b.name)) * state.dir;
@@ -466,7 +466,7 @@ function render() {
       <td><div class="plats">${plats}</div></td>
       <td>${chip("cons", String(g.cons), `cons${g.switch2 ? " s2" : ""}`, g.switch2 ? "Switch 2" : "Switch")}</td>
       <td><div class="mono">${esc(g.update)}</div>${recMine(g)}</td>
-      <td class="pdate">${g.profileDate ? `<span title="${esc(fmtDateTime(g.profileDate))}">${fmtDate(g.profileDate)}</span>` : `<span class="iss-none">No profile</span>`}</td>
+      <td class="pdate">${g.profileDate ? `<span title="${esc(fmtDateTime(g.profileDate))}">${fmtDate(g.profileDate)}</span>` : g.issueDate ? `<span title="${esc(fmtDateTime(g.issueDate))}">${fmtDate(g.issueDate)}</span><small class="ver-src">Latest issue (no profile yet)</small>` : `<span class="iss-none">No profile</span>`}</td>
       <td>${issBtn}</td>
       <td class="notes"><div class="nbox"><div class="nin">${notes.join(" · ")}${g.engine ? `<div class="enote"><span>Engine notes:</span> ${esc(g.engine)}</div>` : ""}${reps}</div><button type="button" class="nless">Show less</button></div><button type="button" class="nmore" hidden>Show more</button></td></tr>${detail}`;
   }).join("");
