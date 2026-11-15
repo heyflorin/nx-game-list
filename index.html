@@ -238,7 +238,15 @@ dialog#priv-dlg h2 { font: 700 22px var(--display); margin: 0 0 6px; padding-rig
 .lib-miss li b { color: var(--fg); font-weight: 500; }
 body[data-lib="none"] .c-lib, body[data-lib="none"] .own-only { display: none !important; }
 
-.own-yes { color: var(--own); background: var(--own-bg); }
+.own-yes { color: var(--own); background: var(--own-bg); cursor: default; }
+.own-yes:focus-visible { outline: 2px solid var(--own); outline-offset: 2px; }
+.own-cell { position: relative; }
+.own-pop { display: none; position: absolute; z-index: 16; top: calc(100% - 8px); left: 10px; width: max-content; max-width: 320px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 9px 12px; box-shadow: 0 12px 32px rgb(0 0 0 / .18);
+  font-size: 12.5px; color: var(--fg); flex-direction: column; gap: 3px; }
+.own-pop b { font-size: 10.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.own-pop span { font-family: var(--mono); font-size: 12px; overflow-wrap: anywhere; }
+.own-cell:hover .own-pop, .own-yes:focus + .own-pop { display: flex; }
 .own-no { color: var(--muted); font-size: 13px; }
 .empty { padding: 32px; text-align: center; color: var(--muted); }
 .missing { margin-top: 26px; background: var(--surface); border: 1px dashed var(--line); border-radius: 10px; padding: 14px 16px; }
@@ -436,8 +444,8 @@ function render() {
     const issBtn = g.issues.length ? `<button type="button" class="iss-btn" data-id="${g.id}" aria-expanded="${expanded.has(g.id)}">${g.nopen ? `<b>${g.nopen} open</b> · ` : ""}${nc} closed</button>` : `<span class="iss-none">None</span>`;
     const detail = expanded.has(g.id) ? `<tr class="detail"><td colspan="9"><ul class="issue-list">${g.issues.map(i => `<li><span class="st st-${i.open ? "open" : "closed"}">${i.open ? "Open" : "Closed"}</span><span>${esc(i.t)} ${ref(i.r, i.n)}</span></li>`).join("")}</ul></td></tr>` : "";
     return `<tr class="${g.owned ? "mine" : ""}">
-      <td><span class="name"><a href="${link}" target="_blank" rel="noopener">${esc(g.name)}</a></span>${g.community ? `<span class="src">Issue report</span>` : ""}${g.engineOnly ? `<span class="src">New profile</span>` : ""}<span class="tid">${g.id}</span>${g.owned ? `<span class="folder">${esc(g.owned)}</span>` : ""}</td>
-      <td class="c-lib">${g.owned ? `<span class="pill own-yes">Yes</span>` : `<span class="own-no">No</span>`}</td>
+      <td><span class="name"><a href="${link}" target="_blank" rel="noopener">${esc(g.name)}</a></span>${g.community ? `<span class="src">Issue report</span>` : ""}${g.engineOnly ? `<span class="src">New profile</span>` : ""}<span class="tid">${g.id}</span></td>
+      <td class="c-lib own-cell">${g.owned ? `<span class="pill own-yes" tabindex="0" aria-describedby="own-${g.id}">Yes</span><span class="own-pop" role="tooltip" id="own-${g.id}"><b>Found in your folder</b>${LIB.owned[g.id].where.map(w => `<span>${esc(w)}</span>`).join("")}</span>` : `<span class="own-no">No</span>`}</td>
       <td><span class="pill t-${g.tier.replace(/[^A-Za-z]+/g, "-")}" title="${esc(g.status)}">${g.tier}</span></td>
       <td><div class="plats">${plats}</div></td>
       <td><span class="cons ${g.switch2 ? "s2" : ""}">${g.switch2 ? "Switch 2" : "Switch"}</span></td>
