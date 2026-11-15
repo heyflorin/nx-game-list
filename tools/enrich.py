@@ -85,7 +85,13 @@ for g in games:
     b = IDX[i]['build']
     if g['update'] == '—': g['update'] = b
     elif not g['update'].startswith('None') and b.split(' ')[0].rstrip(',') not in g['update']:
-        g['notes'].append("NX2Apple's list says " + g['update']); g['update'] = b
+        old = g['update']
+        g['notes'].append("NX2Apple's list says " + old)
+        # keep the update number (v…) NX2Apple gives for a version the engine also lists, so a file named [v…] can match
+        m = re.match(r'([\d.]+) \((v\d+)\)', old)
+        if m and re.search(r'(?<![\d.])' + re.escape(m.group(1)) + r'(?![\d.])', b) and m.group(2) not in b:
+            b = re.sub(r'(?<![\d.])' + re.escape(m.group(1)) + r'(?![\d.])', m.group(0), b, count=1)
+        g['update'] = b
     if g['tier'] in ('Profile only', 'Shown running'): g['tier'] = upgrade(g)
     g['engine'] = enote(i)
     g['profileDate'] = PDATES.get(i, '')

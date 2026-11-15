@@ -747,6 +747,8 @@ function compareCopy(g, o) {
   // otherwise compare the newest update version in the names with the recommended one
   if (upD.length && recD.length) { const d = upD[upD.length - 1]; return { v: d, src: "from your file names", state: recD.every(r => vcmp(d, r) < 0) ? "old" : "new" }; }
   if (upV.length && recV.length) { const v = Math.max(...upV); return { v: recShown(v), src: "from your file names", state: v < Math.max(...recV) ? "old" : "new" }; }
+  // an update is there, but the recommended update has no number in the same form to compare it with
+  if (upV.length || upD.length) return { v: upD.length ? upD[upD.length - 1] : `v${Math.max(...upV)}`, src: "your update's version can't be compared with this list's", state: "unknown" };
   if (vnums.includes(0) || disps.includes("1.0.0")) return { v: "base game only", src: "from your file names", state: recV.includes(0) ? "match" : "old" };
   const upd = (o.files || []).some(f => f.kind === "update");
   return { v: "", src: upd ? "an update file was found, but its name has no version" : found ? "from your file names" : "no version in your file names", state: "unknown" };

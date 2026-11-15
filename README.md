@@ -8,6 +8,15 @@ A filterable list of every Nintendo Switch and Switch 2 game the [nxnative](http
 
 **Check your own games:** choose the folder that holds your games, and the list shows which ones you have and whether your update matches the recommended one.
 
+**Open it:** https://heyflorin.github.io/nx-game-list/
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/screenshot-dark.png">
+  <img src="docs/screenshot-light.png" alt="The NXNative Game Compatibility List, with a sample games folder loaded and the &quot;of yours are on the list&quot; tile selected: Animal Crossing and Mario Kart 8 Deluxe show &quot;You have this update&quot;, and Pikmin 4 shows &quot;Get game update 1.1.1&quot;." width="100%">
+</picture>
+
+<sub>Shown with a sample games folder. The page reads only file and folder names, in your browser.</sub>
+
 ## Use it
 
 Open the page (GitHub Pages, or `index.html` in any browser), press **Check my games**, and choose your games folder.
