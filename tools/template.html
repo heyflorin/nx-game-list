@@ -102,6 +102,8 @@ button.plat.chip-f { background: var(--surface); }
 button.cons.chip-f { background: transparent; }
 button.cons.chip-f { border: 1px solid transparent; border-radius: 5px; padding: 1px 5px; margin-left: -6px; }
 button.pill.chip-f { border: 1px solid transparent; }
+button.src.chip-f { background: none; border: 1px solid transparent; border-radius: 4px; padding: 0 3px; }
+button.own-no.chip-f { background: none; border: 1px solid transparent; border-radius: 5px; padding: 1px 5px; margin-left: -6px; font-size: 13px; color: var(--muted); }
 button.chip-f:hover { border-color: var(--accent); }
 button.chip-f.on { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
 button.cons.chip-f.s2 { color: var(--accent); font-weight: 600; }
@@ -251,7 +253,7 @@ body[data-lib="none"] .c-lib, body[data-lib="none"] .own-only { display: none !i
   font-size: 12.5px; color: var(--fg); flex-direction: column; gap: 3px; }
 .own-pop b { font-size: 10.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
 .own-pop span { font-family: var(--mono); font-size: 12px; overflow-wrap: anywhere; }
-.own-cell:hover .own-pop, .own-yes:focus + .own-pop { display: flex; }
+.own-cell:hover .own-pop, .own-yes:focus-visible + .own-pop { display: flex; }
 .own-no { color: var(--muted); font-size: 13px; }
 .empty { padding: 32px; text-align: center; color: var(--muted); }
 .missing { margin-top: 26px; background: var(--surface); border: 1px dashed var(--line); border-radius: 10px; padding: 14px 16px; }
@@ -314,13 +316,14 @@ footer a { color: inherit; }
 
 
   <div class="legend">
-    <div><span class="pill t-Verified">Verified</span> NX2Apple's maintainers built, installed and ran it on an iPhone.</div>
-    <div><span class="pill t-Playable">Playable</span> nxnative (GAMES.md or the engine's own game notes) says it plays on an iPhone.</div>
-    <div><span class="pill t-Reported-working">Reported working</span> Someone reported it playing in an nxnative issue (device named in the notes).</div>
-    <div><span class="pill t-Plays-on-Mac">Plays on Mac</span> Plays on a Mac; nobody has confirmed it on a phone yet. <b>Partial</b> means it boots or reaches early areas but has a blocking problem.</div>
-    <div><span class="pill t-Shown-running">Shown running</span> Screenshot in the gallery but no row in the profile table.</div>
-    <div><span class="pill t-Profile-only">Profile only</span> A profile ships, so it builds, but nobody has confirmed it on a phone.</div>
-    <div><span class="pill t-Doesn-t-run-yet">Doesn't run yet</span> No profile; an issue reports the build or the boot failing.</div>
+    <div><button type="button" class="pill t-Verified chip-f" data-fk="tier" data-fv="Verified" aria-pressed="false">Verified</button> NX2Apple's maintainers built, installed and ran it on an iPhone.</div>
+    <div><button type="button" class="pill t-Playable chip-f" data-fk="tier" data-fv="Playable" aria-pressed="false">Playable</button> nxnative (GAMES.md or the engine's own game notes) says it plays on an iPhone.</div>
+    <div><button type="button" class="pill t-Reported-working chip-f" data-fk="tier" data-fv="Reported working" aria-pressed="false">Reported working</button> Someone reported it playing in an nxnative issue (device named in the notes).</div>
+    <div><button type="button" class="pill t-Plays-on-Mac chip-f" data-fk="tier" data-fv="Plays on Mac" aria-pressed="false">Plays on Mac</button> Plays on a Mac; nobody has confirmed it on a phone yet.</div>
+    <div><button type="button" class="pill t-Partial chip-f" data-fk="tier" data-fv="Partial" aria-pressed="false">Partial</button> Boots or reaches early areas, but a reported problem stops it going further.</div>
+    <div><button type="button" class="pill t-Shown-running chip-f" data-fk="tier" data-fv="Shown running" aria-pressed="false">Shown running</button> Screenshot in the gallery but no row in the profile table.</div>
+    <div><button type="button" class="pill t-Profile-only chip-f" data-fk="tier" data-fv="Profile only" aria-pressed="false">Profile only</button> A profile ships, so it builds, but nobody has confirmed it on a phone.</div>
+    <div><button type="button" class="pill t-Doesn-t-run-yet chip-f" data-fk="tier" data-fv="Doesn't run yet" aria-pressed="false">Doesn't run yet</button> No profile; an issue reports the build or the boot failing.</div>
   </div>
   <footer><span id="src-line"></span> "Runs on" follows NX2Apple's README: Switch games build for Mac and for iPhone/iPad; Switch 2 games run on the Mac only, except Donkey Kong Bananza (also iPhone and iPad) and Fire Emblem Fortune's Weave (also iPhone). A finding marked fixed comes from an issue closed as completed. Rows marked Issue report have no profile yet; rows marked New profile have one in nxnative that NX2Apple's list does not include yet. Recommended game update is the game's own update (from Nintendo) that the nxnative profile is built for; Profile updated is the date of the last commit to that profile in nxnative. The sources are checked automatically once a day, and the list is updated when something changed.</footer>
 </div>
@@ -449,8 +452,8 @@ function render() {
     const issBtn = g.issues.length ? `<button type="button" class="iss-btn" data-id="${g.id}" aria-expanded="${expanded.has(g.id)}">${g.nopen ? `<b>${g.nopen} open</b> · ` : ""}${nc} closed</button>` : `<span class="iss-none">None</span>`;
     const detail = expanded.has(g.id) ? `<tr class="detail"><td colspan="9"><ul class="issue-list">${g.issues.map(i => `<li><span class="st st-${i.open ? "open" : "closed"}">${i.open ? "Open" : "Closed"}</span><span>${esc(i.t)} ${ref(i.r, i.n)}</span></li>`).join("")}</ul></td></tr>` : "";
     return `<tr class="${g.owned ? "mine" : ""}">
-      <td><span class="name"><a href="${link}" target="_blank" rel="noopener">${esc(g.name)}</a></span>${g.community ? `<span class="src">Issue report</span>` : ""}${g.engineOnly ? `<span class="src">New profile</span>` : ""}<span class="tid">${g.id}</span></td>
-      <td class="c-lib own-cell">${g.owned ? `<span class="pill own-yes" tabindex="0" aria-describedby="own-${g.id}">Yes</span><span class="own-pop" role="tooltip" id="own-${g.id}"><b>Found in your folder</b>${LIB.owned[g.id].where.map(w => `<span>${esc(w)}</span>`).join("")}</span>` : `<span class="own-no">No</span>`}</td>
+      <td><span class="name"><a href="${link}" target="_blank" rel="noopener">${esc(g.name)}</a></span>${g.community ? chip("src", "none", "src", "Issue report") : ""}${g.engineOnly ? chip("src", "new", "src", "New profile") : ""}<span class="tid">${g.id}</span></td>
+      <td class="c-lib own-cell">${g.owned ? `<button type="button" class="pill own-yes chip-f${on("own", "yes") ? " on" : ""}" data-fk="own" data-fv="yes" aria-pressed="${on("own", "yes")}" aria-describedby="own-${g.id}">Yes</button><span class="own-pop" role="tooltip" id="own-${g.id}"><b>Found in your folder</b>${LIB.owned[g.id].where.map(w => `<span>${esc(w)}</span>`).join("")}</span>` : chip("own", "no", "own-no", "No")}</td>
       <td>${chip("tier", g.tier, `pill t-${g.tier.replace(/[^A-Za-z]+/g, "-")}`, g.tier, g.status)}</td>
       <td><div class="plats">${plats}</div></td>
       <td>${chip("cons", String(g.cons), `cons${g.switch2 ? " s2" : ""}`, g.switch2 ? "Switch 2" : "Switch")}</td>
@@ -483,6 +486,7 @@ function buildFilters() {
     <button type="button" class="clr">Clear</button></div></details></div>`).join("");
 }
 function syncControls() {
+  document.querySelectorAll(".legend .chip-f").forEach(b => { b.parentElement.hidden = !GAMES.some(g => g.tier === b.dataset.fv); const on = state.f[b.dataset.fk].includes(b.dataset.fv); b.classList.toggle("on", on); b.setAttribute("aria-pressed", String(on)); });
   $("q").value = state.q;
   document.querySelectorAll(".ms").forEach(d => {
     const f = FILTERS.find(x => x.k === d.dataset.k), sel = state.f[f.k];
@@ -541,13 +545,14 @@ document.querySelectorAll("th[data-k] button").forEach(b => b.addEventListener("
 $("reset").addEventListener("click", () => { state.q = ""; state.f = blank(); syncControls(); render(); });
 
 const closeNotes = () => document.querySelectorAll("td.notes.open").forEach(td => { td.classList.remove("open"); td.style.height = ""; });
-$("rows").addEventListener("click", e => {
+document.addEventListener("click", e => {
   const c = e.target.closest(".chip-f");
-  if (c) {
-    const k = c.dataset.fk, v = c.dataset.fv, sel = state.f[k];
-    state.f[k] = sel.includes(v) ? sel.filter(x => x !== v) : [...sel, v];
-    syncControls(); render(); return;
-  }
+  if (!c) return;
+  const k = c.dataset.fk, v = c.dataset.fv, sel = state.f[k];
+  state.f[k] = sel.includes(v) ? sel.filter(x => x !== v) : [...sel, v];
+  syncControls(); render();
+});
+$("rows").addEventListener("click", e => {
   const more = e.target.closest(".nmore"), less = e.target.closest(".nless");
   if (less) { closeNotes(); return; }
   if (more) { const td = more.closest("td"); closeNotes(); td.style.height = td.getBoundingClientRect().height + "px"; td.classList.add("open"); return; }
