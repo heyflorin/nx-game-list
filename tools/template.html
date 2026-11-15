@@ -336,7 +336,10 @@ const REPO = { nx: ["seedds/nxnative", "nxnative"], app: ["LNPANDY/NX2Apple", "N
 const ISSUE = (r, n) => `https://github.com/${REPO[r][0]}/issues/${n}`;
 const ref = (r, n) => `<a href="${ISSUE(r, n)}" target="_blank" rel="noopener">${REPO[r][1]} #${n}</a>`;
 const expanded = new Set();
-const fmtDate = d => new Date(d + "T00:00:00").toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
+// Dates are stored in UTC; show them in the viewer's own time zone (a bare YYYY-MM-DD from older data counts as UTC noon)
+const toDate = d => new Date(/T/.test(d) ? d : d + "T12:00:00Z");
+const fmtDate = d => toDate(d).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
+const fmtDateTime = d => toDate(d).toLocaleString(undefined, { year: "numeric", month: "short", day: "numeric", hour: "numeric", minute: "2-digit", timeZoneName: "short" });
 function recMine(g) {
   // The version compared is the game's own update file (Nintendo's update for the game), not the nxnative profile.
   const m = g.mine;
@@ -432,7 +435,7 @@ function render() {
       <td><div class="plats">${plats}</div></td>
       <td><span class="cons ${g.switch2 ? "s2" : ""}">${g.switch2 ? "Switch 2" : "Switch"}</span></td>
       <td><div class="mono">${esc(g.update)}</div>${recMine(g)}</td>
-      <td class="pdate">${g.profileDate ? fmtDate(g.profileDate) : `<span class="iss-none">No profile</span>`}</td>
+      <td class="pdate">${g.profileDate ? `<span title="${esc(fmtDateTime(g.profileDate))}">${fmtDate(g.profileDate)}</span>` : `<span class="iss-none">No profile</span>`}</td>
       <td>${issBtn}</td>
       <td class="notes"><div class="nbox"><div class="nin">${notes.join(" · ")}${g.engine ? `<div class="enote"><span>Engine notes:</span> ${esc(g.engine)}</div>` : ""}${reps}</div><button type="button" class="nless">Show less</button></div><button type="button" class="nmore" hidden>Show more</button></td></tr>${detail}`;
   }).join("");
@@ -785,8 +788,8 @@ document.addEventListener("click", e => { if (!about.hidden && !about.contains(e
 document.addEventListener("keydown", e => { if (e.key === "Escape" && !about.hidden) { setAbout(false); aboutBtn.focus(); } });
 {
   const m = DATA.meta || {}, n = x => (x || 0).toLocaleString();
-  const when = m.checked ? new Date(m.checked).toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" }) : "";
-  $("src-line").textContent = `Sources: ${n(m.profiles)} nxnative profiles${m.nxnative_commit ? ` (commit ${m.nxnative_commit}, ${m.nxnative_date})` : ""}, NX2Apple's GAMES.md, ` +
+  const when = m.checked ? fmtDateTime(m.checked) : "";
+  $("src-line").textContent = `Sources: ${n(m.profiles)} nxnative profiles${m.nxnative_commit ? ` (commit ${m.nxnative_commit}, ${m.nxnative_date ? fmtDate(m.nxnative_date) : ""})` : ""}, NX2Apple's GAMES.md, ` +
     `and all ${n(m.issues_nx)} issues in seedds/nxnative and ${n(m.issues_app)} in LNPANDY/NX2Apple, open and closed.${when ? ` List last updated ${when}.` : ""}`;
 }
 applyLibrary(); stats(); syncControls(); render();

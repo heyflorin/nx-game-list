@@ -14,14 +14,14 @@ tmp="$(mktemp -d)"
 git clone -q --filter=blob:none --no-checkout https://github.com/seedds/nxnative.git "$tmp/nxn"
 git -C "$tmp/nxn" sparse-checkout set --no-cone '/dm/games/README.md' '/dm/games/*/README.md'
 git -C "$tmp/nxn" checkout -q
-git -C "$tmp/nxn" log --format='@%cs' --name-only -- dm/games | python3 "$root/tools/profile_dates.py" > readmes/profile-dates.json
+git -C "$tmp/nxn" log --format='@%cI' --name-only -- dm/games | python3 "$root/tools/profile_dates.py" > readmes/profile-dates.json
 cp "$tmp/nxn/dm/games/README.md" readmes/games-index.md
 for d in "$tmp"/nxn/dm/games/*/; do
   [ -f "$d/README.md" ] && cp "$d/README.md" "readmes/all/$(basename "$d").md"
 done
 echo "   nxnative commit $(git -C "$tmp/nxn" log -1 --format='%h %cd')"
 printf '{"checked": "%s", "nxnative_commit": "%s", "nxnative_date": "%s"}\n' \
-  "$(date -u +%Y-%m-%dT%H:%MZ)" "$(git -C "$tmp/nxn" log -1 --format=%h)" "$(git -C "$tmp/nxn" log -1 --format=%cs)" > meta.json
+  "$(date -u +%Y-%m-%dT%H:%MZ)" "$(git -C "$tmp/nxn" log -1 --format=%h)" "$(TZ=UTC git -C "$tmp/nxn" log -1 --date=format-local:%Y-%m-%dT%H:%M:%SZ --format=%cd)" > meta.json
 rm -rf "$tmp"
 
 echo "3/4 issues in seedds/nxnative and LNPANDY/NX2Apple"
