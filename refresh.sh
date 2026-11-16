@@ -3,6 +3,7 @@
 # Needs: curl, git, python3, and the GitHub CLI (gh) signed in, for the issue search.
 set -euo pipefail
 root="$(cd "$(dirname "$0")" && pwd)"
+mkdir -p "$root/build"   # build/ is not in git, so a fresh checkout (as in GitHub Actions) has none
 cd "$root/data"
 
 echo "1/4 NX2Apple GAMES.md"
