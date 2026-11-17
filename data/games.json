@@ -507,7 +507,7 @@
 "name": "Animal Crossing: New Horizons",
 "id": "01006F8002326000",
 "update": "3.0.3 (v2228224)",
-"status": "Verified here — builds, installs and runs smoothly on an iPhone",
+"status": "Verified here — builds, installs and runs smoothly on an iPhone, full screen",
 "note": "",
 "switch2": false
 },
@@ -587,7 +587,7 @@
 "name": "The Legend of Zelda: Breath of the Wild",
 "id": "01007EF00011E000",
 "update": "1.9.0 (v1114112)",
-"status": "Playable on an iPhone (upstream)",
+"status": "Playable on an iPhone (upstream), full screen",
 "note": "60 fps with 1.9.0",
 "switch2": false
 },
@@ -1087,11 +1087,11 @@
 "name": "The Legend of Zelda: Ocarina of Time",
 "id": "0400486024DEC000",
 "update": "v131072",
-"status": "Verified here — plays on a Mac, up to inside Ganon's Castle (462,601 frames in 2 h 41 min)",
+"status": "Verified here — plays on a Mac, up to inside Ganon's Castle (462,601 frames in 2 h 41 min), full screen (wide aspect ratios)",
 "note": "Switch 2, Mac only, from a NUP",
 "switch2": true,
 "upstream": "Plays on the Mac through the title, the opening and Kokiri Forest (update v131072), about 59 fps. Mac only so far",
-"fork": "Built from the command line and played on a Mac up to inside Ganon's Castle: 462,601 frames in 2 h 41 min, frame time p50 16.66 ms, no crash. Host `92aa1222`, 240 commits behind `main`, so what comes after that point is not covered"
+"fork": "Built from the command line and played on a Mac up to inside Ganon's Castle: 462,601 frames in 2 h 41 min, frame time p50 16.66 ms, no crash, full screen (wide aspect ratios). Host `92aa1222`, 240 commits behind `main`, so what comes after that point is not covered"
 },
 {
 "name": "Donkey Kong Bananza",
@@ -1117,11 +1117,11 @@
 "name": "Pokémon Pokopia",
 "id": "0400A3A01EE4C000",
 "update": "v655360",
-"status": "Profile present, not verified on a phone",
+"status": "Profile present, not verified on a phone, full screen (wide aspect ratios on v327680)",
 "note": "Switch 2, Mac only, from a dump",
 "switch2": true,
 "upstream": "Plays on the Mac (update v655360). No IPA built",
-"fork": "Not tried"
+"fork": "Full screen (wide aspect ratios on v327680)"
 },
 {
 "name": "Mario Kart World",
