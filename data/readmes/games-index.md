@@ -85,6 +85,7 @@ One row per profile; the notes are each profile's `README.md`. Entries marked pr
 | [Cozy Land](0100777022394000/README.md) | `0100777022394000` | 1.0.0 (base) | 17.5.8 | Unity 2023.2.20f1 IL2CPP | NVN | — |
 | [Cult of the Lamb](01002E7016C46000/README.md) | `01002E7016C46000` | 1.5.28 | 19.3.14 | Unity 2022.3.62f3 IL2CPP, FMOD | NVN | — |
 | [Cuphead](0100A5C00D162000/README.md) | `0100A5C00D162000` | 1.3.7 | 5.5.0 | Unity 2017.4.9f1 IL2CPP | NVN | — |
+| [Cytus α](010063100B2C2000/README.md) | `010063100B2C2000` | 1.0.6 | 6.4.2 | Unity 2018.2.18f1 IL2CPP, FMOD | NVN | — |
 | [DARK SOULS: REMASTERED](01004AB00A260000/README.md) | `01004AB00A260000` | 1.0.3 | 4.5.0 | FromSoftware's engine | NVN | [60 fps mode](01004AB00A260000/README.md#frame-rate) |
 | [DAVE THE DIVER](010097F018538000/README.md) | `010097F018538000` | 1.0.6.1267 | 20.5.29 | Unity 6000.0.52f1 IL2CPP, FMOD | NVN | — |
 | [Dead Cells](0100646009FBE000/README.md) | `0100646009FBE000` | 1.25.0 | 13.3.5 | Heaps / HashLink (HL/C) | NVN | — |
@@ -141,7 +142,7 @@ One row per profile; the notes are each profile's `README.md`. Entries marked pr
 | [Luigi's Mansion 3](0100DCA0064A6000/README.md) | `0100DCA0064A6000` | 1.4.0 | 7.3.2 | Next Level Games' engine | NVN | 60 fps target |
 | [Mario & Luigi: Brothership](01006D0017F7A000/README.md) | `01006D0017F7A000` | 1.0.0 | 12.3.2 | Unreal Engine 4.27.2, Wwise | NVN | 60 fps target, [120 fps option](01006D0017F7A000/README.md#frame-rate) |
 | [Mario Golf: Super Rush](0100C9C00E25C000/README.md) | `0100C9C00E25C000` | 4.0.0 | 11.4.0 | Camelot's engine, NintendoWare | NVN | — |
-| [Mario Kart World](0400C3F00006E000/README.md) | `0400C3F00006E000` | v0 (Switch 2) | 19.3.3 (Ounce) | Nintendo EPD (sead / agl / gsys, Pia) | NVN2 | 60 fps target |
+| [Mario Kart World](0400C3F00006E000/README.md) | `0400C3F00006E000` | v0, v917504 (Switch 2) | 19.3.3 (Ounce) | Nintendo EPD (sead / agl / gsys, Pia) | NVN2 | 60 fps target |
 | [Mario Tennis Fever](0400D4201C6EA000/README.md) | `0400D4201C6EA000` | v327680 (Switch 2) | 20.5.17 (Ounce) | Camelot's engine, NintendoWare | NVN2 | — |
 | [Mario Kart 8 Deluxe](0100152000022000/README.md) | `0100152000022000` | 4.0.0, 4.0.1 | 4.4.0 | Nintendo (sead / agl / gsys, NintendoWare, Pia) | NVN | — |
 | [Mario + Rabbids Kingdom Battle](010067300059A000/README.md) | `010067300059A000` | 1.9.589692 | 4.4.0 | Ubisoft Snowdrop | NVN | — |
@@ -273,7 +274,8 @@ One row per profile; the notes are each profile's `README.md`. Entries marked pr
 | `ipa`, `app_category` | iOS app: the default IPA file name and the App Store category |
 | `build <ver> <display version> <module>=<build ID>…` | One row per version the game was brought up on. The NSP script builds any version (the base game alone, any update): a registered one from the profile as it is, any other from a profile derived from it (`<id>_build/profile`: the same keys, that version's own shader tables; `derive_profile`), with a red line naming the modules whose build no row registers, which the per-build cuts and host fixes do not reach. The host reports the display version by `main`'s build ID |
 | `package` | The version the profile's tables, prewarm list and notes were made on. The NSP script packs the newest version in the folder (`-p` / `PACKAGE` picks another) |
-| `shader_versions` | Versions whose union the shader tables are (base game first). A registered version is built from the profile as it is only when all of them are in the folder; otherwise from a derived profile, with tables from the packed version alone |
+| `shader_versions` | Versions whose union the shader tables are (base game first). A registered version is built from the profile as it is only when it is in `shader_versions` or `shader_covers` and all of `shader_versions` are in the folder; otherwise from a derived profile, with tables from the packed version alone |
+| `shader_covers` | Optional, whitespace-separated registered `build` versions not in `shader_versions` whose shaders have been verified to be covered by the committed tables (Hades II `v655360`, FIFA 23 `v196608`). Omitting a registered build from both keys makes the NSP script derive that build's own shader tables even when `shader_versions` is present (Mario Kart World `v917504`) |
 | `modules` | Code modules rewritten and loaded, in load order. `rtld` is replaced by the host. A game whose versions differ in modules lists them all (Mario Kart World: `main subsdk0 subsdk1 sdk`, the base game has no `subsdk1`): each `build` row names its own, the host loads the modules of the row of `main`'s build (`main.c` `profile_modules`; all of `modules` for a build with no row), `build_ipa.sh` packs the same (`game.py modules`), and the NSP script rewrites the ones the packed version's ExeFS holds. A module a row names that `modules` does not list stays unloaded (Hades' `subsdk0` and `subsdk1`) |
 | `romfs_marker` | A path that must exist in the RomFS; empty checks the directory itself for a program without a data section (ANIMAL WELL) |
 | `zip_store` | Extensions the IPA stores without compressing |
