@@ -121,6 +121,8 @@ One row per profile; the notes are each profile's `README.md`. Entries marked pr
 | [DRAGON QUEST VII Reimagined](0100A9D01C446000/README.md) | `0100A9D01C446000` | 1.2.0 | 19.3.1 | Unreal Engine 4.27 | NVN | 60 fps target |
 | [DRAGON QUEST XI S: Echoes of an Elusive Age – Definitive Edition](01006C300E9F0000/README.md) | `01006C300E9F0000` | 1.0.4 | 7.3.2 | Unreal Engine 4.18 | NVN | 60 fps target |
 | [EA SPORTS FC 27](0100C49025D3E000/README.md) | `0100C49025D3E000` | 1.8d.310c | 22.2.0 | Frostbite 2025.1.2 (its NVN renderer in an NRO) | NVN | 60 fps target |
+| [ENDER LILIES: Quietus of the Knights](0100CCF012E9A000/README.md) | `0100CCF012E9A000` | 1.1.5c | 10.4.0 | Unreal Engine 4.27, FMOD | NVN | — |
+| [ESP Ra.De. Ψ](0100F9600E746000/README.md) | `0100F9600E746000` | 1.4.1 | 7.4.0 | M2's engine (`m2engage`), emulating Cave's 1998 arcade board in NROs | NVN | — |
 | [Factorio](01004200189F4000/README.md) | `01004200189F4000` | 2.0.76 | 21.4.2 | Wube Software's engine, SDL | OpenGL | — |
 | [Farming Simulator 26: Nintendo Switch Edition](0100D440269E8000/README.md) | `0100D440269E8000` | 1.0.1.0 | 20.5.4 | GIANTS Engine | NVN | — |
 | [Fate/hollow ataraxia REMASTERED](010070E022546000/README.md) | `010070E022546000` | 1.0.2 | 16.2.6 | TYPE-MOON's Fuzz engine (`smash::fw`) | OpenGL | — |
@@ -207,6 +209,7 @@ One row per profile; the notes are each profile's `README.md`. Entries marked pr
 | [Pokémon Brilliant Diamond](0100000011D90000/README.md) | `0100000011D90000` | 1.3.0 | 11.4.3 | Unity 2019.4.27f1 IL2CPP | NVN | 60 fps target |
 | [Pokémon Legends: Arceus](01001F5010DFA000/README.md) | `01001F5010DFA000` | 1.1.1 | 11.4.0 | Game Freak's engine (between Sword's and Trinity) | NVN | — |
 | [Pokémon Legends: Z-A](0100F43008C44000/README.md) | `0100F43008C44000` | 2.0.2 | 19.3.11 | Game Freak's Trinity engine | NVN | — |
+| [Pokémon: Let's Go, Eevee!](0100187003A36000/README.md) | `0100187003A36000` | 1.0.2 | 5.4.151 | Game Freak's engine | NVN | [60 fps target on matching builds](0100187003A36000/README.md#frame-rate) |
 | [Pokémon: Let's Go, Pikachu!](010003F003A34000/README.md) | `010003F003A34000` | 1.0.2 (provisional Mac profile) | 5.4.151 | Game Freak's engine | NVN | [60 fps target on matching builds](010003F003A34000/README.md#frame-rate) |
 | [Pokémon Pokopia](0400A3A01EE4C000/README.md) | `0400A3A01EE4C000` | v655360 (Switch 2) | 20.5.25 (Ounce) | Koei Tecmo's KTGL | NVN2 | — |
 | [Pokémon Scarlet](0100A3D008C5C000/README.md) | `0100A3D008C5C000` | 1.0.0 | 13.3.5 | Game Freak's Trinity engine | NVN | — |
@@ -223,11 +226,13 @@ One row per profile; the notes are each profile's `README.md`. Entries marked pr
 | [Red Dead Redemption](01007820196A6000/README.md) | `01007820196A6000` | 1.0.7 | 15.3.2 | Rockstar's RAGE (Double Eleven port) | NVN | 60 fps target |
 | [Resident Evil](010050F00BC1A000/README.md) | `010050F00BC1A000` | 1.0.0 (base) | 5.4.0 | Capcom's MT Framework | NVN | — |
 | [Resident Evil 4](0400569027BF4000/README.md) | `0400569027BF4000` | v131072 (Switch 2) | 21.4.3 (Ounce) | RE Engine, Havok, Wwise | NVN2 | — |
+| [Réussir : Code de la route](0100EA300DE6E000/README.md) | `0100EA300DE6E000` | 1.0.1 | 7.3.2 | Unity 2018.3.9f1 IL2CPP, FMOD | NVN | — |
 | [Return of the Obra Dinn](010032E00E6E2000/README.md) | `010032E00E6E2000` | 1.0.1 | 8.2.0 | Unity 2017.4.28f1 IL2CPP | NVN | — |
 | [Rhythm Heaven Groove](0100D9F01D474000/README.md) | `0100D9F01D474000` | 1.0.0 (base) | 21.4.0 | Nintendo's own 2D engine | NVN | — |
 | [ROMANCE OF THE THREE KINGDOMS 8 REMAKE](0100C2A01A730000/README.md) | `0100C2A01A730000` | 1.1.3 | 17.5.3 | Koei Tecmo's KTGL | NVN | — |
 | [ROMANCE OF THE THREE KINGDOMS XIV: Diplomacy and Strategy Expansion Pack](0100ED7012DB2000/README.md) | `0100ED7012DB2000` | 1.0.10 | 10.4.1 | Koei Tecmo's KTGL | NVN | — |
 | [Sam & Max: The Devil's Playhouse](0100D5501857E000/README.md) | `0100D5501857E000` | 1.8.0 (provisional Mac profile) | 17.5.6 | Telltale Tool, FMOD | NVN | — |
+| [SD GUNDAM G GENERATION CROSS RAYS](010055700CEA8000/README.md) | `010055700CEA8000` | 1.6.3 | 9.4.1 | TOM CREATE's engine on CRIWARE | NVN | — |
 | [Sea of Stars](01008C0016544000/README.md) | `01008C0016544000` | 2.0.59001 | 16.2.0 | Unity 2021.3.25f1 IL2CPP | NVN | — |
 | [SHIN MEGAMI TENSEI V: Vengeance](010069C01AB82000/README.md) | `010069C01AB82000` | 1.0.3 | 15.3.2 | Unreal Engine 4.27 | NVN | 60 fps target |
 | [Sid Meier's Civilization VI](010044500C182000/README.md) | `010044500C182000` | 1.2.19 | 8.2.1 | Firaxis, Havok, Wwise | NVN | — |
@@ -239,6 +244,7 @@ One row per profile; the notes are each profile's `README.md`. Entries marked pr
 | [South Park: The Fractured But Whole](01008F2005154000/README.md) | `01008F2005154000` | 1.05 | 3.5.1 | Ubisoft Snowdrop | NVN | 60 fps target |
 | [South Park: The Stick of Truth](010095300B6A4000/README.md) | `010095300B6A4000` | 1.01 | 4.5.0 | Obsidian's Onyx engine, Bink | NVN | [60 fps mode](010095300B6A4000/README.md#frame-rate) |
 | [STEINS;GATE RE:BOOT](01008BC024FDE000/README.md) | `01008BC024FDE000` | 1.0.3 | 20.5.17 | M2's ADV engine | NVN | — |
+| [Star Ocean: The Second Story R](010065301A2E0000/README.md) | `010065301A2E0000` | 1.1.0 | 15.3.2 | Unity 2021.3.22f1 IL2CPP, CRIWARE, FMOD | NVN | — |
 | [Stardew Valley](0100E65002BB8000/README.md) | `0100E65002BB8000` | 1.6.15.13 | 20.5.27 | MonoGame (C# → C++ by BRUTE) | NVN | — |
 | [SteamWorld Dig](01009320084A4000/README.md) | `01009320084A4000` | 1.12.0 | 3.4.0 | Image & Form's own engine (SteamWorld) | NVN | — |
 | [SteamWorld Dig 2](0100CA9002322000/README.md) | `0100CA9002322000` | 4.1.1 | 3.4.0 | Image & Form's own engine (SteamWorld) | NVN | — |
